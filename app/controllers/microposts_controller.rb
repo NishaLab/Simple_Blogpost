@@ -27,6 +27,7 @@ class MicropostsController < ApplicationController
   # POST /microposts.json
   def create
     @micropost = current_user.microposts.build(micropost_params)
+    @micropost.image.attach(params[:micropost][:image])
     if @micropost.save
       flash[:succes] = 'Post is created'
       redirect_to root_url
@@ -71,7 +72,7 @@ class MicropostsController < ApplicationController
 
   # Only allow a list of trusted parameters through.
   def micropost_params
-    params.require(:micropost).permit(:content)
+    params.require(:micropost).permit(:content, :image)
   end
 
   def correct_user
