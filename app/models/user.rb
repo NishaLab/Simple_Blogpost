@@ -2,7 +2,7 @@
 
 # dasdasda
 class User < ApplicationRecord
-  attr_accessor :remember_token, :activation_token
+  attr_accessor :remember_token, :activation_token, reset_token
 
   before_save { self.email = email.downcase }
   before_create :create_activation_digest
@@ -47,10 +47,20 @@ class User < ApplicationRecord
     UserMailer.account_activation(self).deliver_now
   end
 
+  def send_reset_email
+    UserMailer.password_reset(self).deliver_now
+  end
+
   private
 
   def create_activation_digest
     self.activation_token = User.new_token
     self.activation_digest = User.digest(activation_token)
+  end
+
+  def create_reset_digest
+    self.reset_token = User.new_token
+    self.reset_digest = User.digest(activation_token)
+    self.reset_at = Time.zone.now
   end
 end
