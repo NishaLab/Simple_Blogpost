@@ -4,6 +4,7 @@
 class MicropostsController < ApplicationController
   before_action :set_micropost, only: %i[show edit update destroy]
   before_action :logged_in_user, only: %i[create destroy]
+  before_action :correct_user, only: :destroy
   # GET /microposts
   # GET /microposts.json
   def index
@@ -51,7 +52,15 @@ class MicropostsController < ApplicationController
 
   # DELETE /microposts/1
   # DELETE /microposts/1.json
-  def destroy; end
+  def destroy
+    Micropost.find_by(id: params[:id]).destroy
+    flash[:succes] = 'Micropost was succesfully deleted'
+    if request.referrer.nil? || request.referrer == microposts_url
+      redirect_to root_url
+    else
+      redirect_to request.referrer
+    end
+  end
 
   private
 
@@ -63,5 +72,10 @@ class MicropostsController < ApplicationController
   # Only allow a list of trusted parameters through.
   def micropost_params
     params.require(:micropost).permit(:content)
+  end
+
+  def correct_user
+    @micropost = current_user.microposts.find_by(id: params[:id])
+    redirect_to root_url if @micropost.nil?
   end
 end

@@ -22,3 +22,7 @@ micropost_<%= n %>:
   created_at: <%= 42.days.ago %>
   user: michael
 <% end %>
+ants:
+  content: "Writing a short test"
+  created_at: <%= Time.zone.now %>
+  user: archer
