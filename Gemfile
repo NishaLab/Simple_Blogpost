@@ -11,6 +11,7 @@ gem 'rails', '~> 6.0.3', '>= 6.0.3.2'
 gem 'bcrypt', '3.1.13'
 # Generate fake data
 gem 'faker', '2.11.0'
+gem 'rubocop-faker'
 # Pagination gem
 gem 'bootstrap-will_paginate', '1.0.0'
 gem 'will_paginate', '3.3.0'
