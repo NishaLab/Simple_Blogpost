@@ -2,15 +2,15 @@
 
 class AccountActivationController < ApplicationController
   def edit
-    @user = User.find_by(email: params[:password_reset][:email].downcase)
-    if @user
-      @user.create_reset_digest
-      @user.send_password_reset_email
-      flash[:info] = 'Email sent with password reset instructions'
-      redirect_to root_url
+    user = User.find_by(email: params[:email])
+    if user&.authenticated?(:activation, params[:id]) && !user.activated?
+      user.activate
+      log_in user
+      flash[:succes] = 'Account Activated'
+      redirect_to user
     else
-      flash.now[:danger] = 'Email address not found'
-      render 'new'
+      flash[:danger] = 'Invalid Activation Link'
+      redirect_to root_url
     end
   end
 end
