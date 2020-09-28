@@ -27,6 +27,7 @@ class PasswordResetsController < ApplicationController
       render 'edit'
     elsif @user.update(user_params)
       @user.forget
+      @user.update_attribute(:reset_digest, nil)
       reset_session
       log_in(@user)
       flash[:succes] = 'Password has been changed'
