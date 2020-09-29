@@ -8,6 +8,9 @@
       </h1>
     </section>
     <%= render 'shared/follow_form' if logged_in? %>
+    <section class="stats">
+      <%= render 'shared/stat' %>
+    </section>
   </aside>
   <div class="col-md-8">
     <% if @user.microposts.any? %>
