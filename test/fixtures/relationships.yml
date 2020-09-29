@@ -12,6 +12,3 @@ three:
 four:
   follower: archer
   followed: michael
-five:
-  follower: michael
-  followed: archer
