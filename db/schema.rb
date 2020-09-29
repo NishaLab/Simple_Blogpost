@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # This file is auto-generated from the current state of the database. Instead
 # of editing this file, please use the migrations feature of Active Record to
 # incrementally modify your database, and then regenerate this schema definition.
@@ -50,6 +48,9 @@ ActiveRecord::Schema.define(version: 20_200_929_013_540) do
     t.integer 'followed_id'
     t.datetime 'created_at', precision: 6, null: false
     t.datetime 'updated_at', precision: 6, null: false
+    t.index ['followed_id'], name: 'index_relationships_on_followed_id'
+    t.index %w[follower_id followed_id], name: 'index_relationships_on_follower_id_and_followed_id', unique: true
+    t.index ['follower_id'], name: 'index_relationships_on_follower_id'
   end
 
   create_table 'users', force: :cascade do |t|
