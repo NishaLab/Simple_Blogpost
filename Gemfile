@@ -43,8 +43,8 @@ gem "jbuilder", "~> 2.7"
 gem "bootsnap", ">= 1.4.2", require: false
 gem "rubocop", "0.71", require: false
 # Google Authen
-gem "omniauth"
 gem "dotenv-rails"
+gem "omniauth"
 gem "omniauth-google-oauth2"
 
 group :development, :test do
@@ -65,8 +65,8 @@ group :test do
   # Adds support for Capybara system testing and selenium driver
   gem "capybara", ">= 2.15"
   gem "minitest-reporters", "~> 1.1", ">= 1.1.7"
+  gem "rspec-rails", "~> 4.0.1"
   gem "selenium-webdriver"
-  gem 'rspec-rails', '~> 4.0.1'
   # Easy installation and use of web drivers to run system tests with browsers
   gem "webdrivers"
   # Template testing
