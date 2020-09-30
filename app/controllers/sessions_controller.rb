@@ -28,4 +28,18 @@ class SessionsController < ApplicationController
     log_out if logged_in?
     redirect_to root_url
   end
+
+  def omniauth
+    @user = User.from_omniauth(request.env["omniauth.auth"])
+    if @user.persisted? || @user.save
+      forwarding_url = session[:forwarding_url]
+      reset_session
+      log_in(@user)
+      redirect_to forwarding_url || @user
+      flash[:succes] = "Login successful"
+    else
+      flash[:danger] = @user.errors.full_messsages.join("\n")
+      redirect_to login_path
+    end
+  end
 end

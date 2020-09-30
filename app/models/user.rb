@@ -86,6 +86,18 @@ class User < ApplicationRecord
     following.delete(other_user)
   end
 
+  def self.from_omniauth access_token
+    data = access_token.info
+    # handle if user exist in database
+    user = User.where(email: data["email"]).first
+    # handle if user isn't exist in database
+    password = SecureRandom.urlsafe_base64
+    user || User.create(name: data["name"], email: data["email"],
+                         password: password,
+                         password_confirmation: password,
+                         activated: true, activated_at: Time.zone.now)
+  end
+
   private
 
   def create_activation_digest
