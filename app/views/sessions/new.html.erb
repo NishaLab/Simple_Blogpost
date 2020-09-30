@@ -1,8 +1,11 @@
 <% provide(:title,"Log In")%>
 
 <h1>Log In </h1>
+
 <div class="row">
+
   <div class="col-md-6 col-md-offset-3">
+
     <%= form_with(url: login_path,scope: :session, local: true) do |f| %>
 
     <%= f.label :email %>
@@ -18,5 +21,8 @@
     <%= f.submit "Login", class: "btn btn-primary"%>
     <% end %>
     <p>New Users? <%= link_to 'Sign up now!', sign_up_path %></p>
+    <div class="google">
+      <%= link_to  "Sign in with Google", '#' %>
+    </div>
   </div>
 </div>
