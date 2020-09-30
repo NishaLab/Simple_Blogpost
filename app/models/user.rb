@@ -8,10 +8,10 @@ class User < ApplicationRecord
   before_create :create_activation_digest
 
   has_many :microposts, dependent: :destroy
-  has_many :active_relationships, class_name: 'Relationship',
-                                  foreign_key: 'follower_id', dependent: :destroy
-  has_many :passive_relationships, class_name: 'Relationship',
-                                   foreign_key: 'followed_id',
+  has_many :active_relationships, class_name: "Relationship",
+                                  foreign_key: "follower_id", dependent: :destroy
+  has_many :passive_relationships, class_name: "Relationship",
+                                   foreign_key: "followed_id",
                                    dependent: :destroy
   has_many :following, through: :active_relationships, source: :followed
   has_many :followers, through: :passive_relationships, source: :follower
@@ -23,7 +23,7 @@ class User < ApplicationRecord
                        length: { maximum: 58, minimum: 8 }
   has_secure_password
 
-  def self.digest(string)
+  def self.digest string
     cost = ActiveModel::SecurePassword.min_cost ? BCrypt::Engine::MIN_COST : BCrypt::Engine.cost
     BCrypt::Password.create(string, cost: cost)
   end
@@ -37,7 +37,7 @@ class User < ApplicationRecord
     update_attribute(:remember_digest, User.digest(remember_token))
   end
 
-  def authenticated?(attribute, token)
+  def authenticated? attribute, token
     digest = send("#{attribute}_digest")
     return false if digest.nil?
 
@@ -71,19 +71,19 @@ class User < ApplicationRecord
   end
 
   def feed
-    following_ids = 'SELECT followed_id FROM relationships WHERE follower_id = :user_id'
+    following_ids = "SELECT followed_id FROM relationships WHERE follower_id = :user_id"
     Micropost.where("user_id IN (#{following_ids}) OR user_id = :user_id", user_id: id)
   end
 
-  def follow(other_user)
+  def follow other_user
     following << other_user
   end
 
-  def following?(other_user)
+  def following? other_user
     following.include?(other_user)
   end
 
-  def unfollow(other_user)
+  def unfollow other_user
     following.delete(other_user)
   end
 

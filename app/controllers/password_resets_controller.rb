@@ -1,9 +1,9 @@
 # frozen_string_literal: true
 
 class PasswordResetsController < ApplicationController
-  before_action :set_user, only: %i[edit update]
-  before_action :valid_user, only: %i[edit update]
-  before_action :check_expiration, only: %i[edit update]
+  before_action :set_user, only: %i(edit update)
+  before_action :valid_user, only: %i(edit update)
+  before_action :check_expiration, only: %i(edit update)
 
   def new; end
 
@@ -12,11 +12,11 @@ class PasswordResetsController < ApplicationController
     if @user
       @user.create_reset_digest
       @user.send_password_reset_email
-      flash[:info] = 'Email sent with password reset instructions'
+      flash[:info] = "Email sent with password reset instructions"
       redirect_to root_url
     else
-      flash.now[:danger] = 'Email address not found'
-      render 'new'
+      flash.now[:danger] = "Email address not found"
+      render "new"
     end
   end
 
@@ -24,16 +24,16 @@ class PasswordResetsController < ApplicationController
     if params[:user][:password].empty? || params[:user][:password_confirmation].empty?
       @user.errors.add(:password, "can't be empty")
       @user.errors.add(:password_confirmation, "can't be empty")
-      render 'edit'
+      render "edit"
     elsif @user.update(user_params)
       @user.forget
       @user.update_attribute(:reset_digest, nil)
       reset_session
       log_in(@user)
-      flash[:succes] = 'Password has been changed'
+      flash[:succes] = "Password has been changed"
       redirect_to @user
     else
-      render 'edit'
+      render "edit"
     end
   end
 
@@ -54,7 +54,7 @@ class PasswordResetsController < ApplicationController
   end
 
   def check_expiration
-    flash[:danger] = 'Password reset has expired.' if @user.password_reset_expired?
+    flash[:danger] = "Password reset has expired." if @user.password_reset_expired?
     return redirect_to new_password_reset_url if @user.password_reset_expired?
   end
 end

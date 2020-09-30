@@ -2,8 +2,8 @@
 
 # micopost controller
 class MicropostsController < ApplicationController
-  before_action :set_micropost, only: %i[show edit update destroy]
-  before_action :logged_in_user, only: %i[create destroy]
+  before_action :set_micropost, only: %i(show edit update destroy)
+  before_action :logged_in_user, only: %i(create destroy)
   before_action :correct_user, only: :destroy
   # GET /microposts
   # GET /microposts.json
@@ -29,11 +29,11 @@ class MicropostsController < ApplicationController
     @micropost = current_user.microposts.build(micropost_params)
     @micropost.image.attach(params[:micropost][:image])
     if @micropost.save
-      flash[:succes] = 'Post is created'
+      flash[:succes] = "Post is created"
       redirect_to root_url
     else
       @feed_items = current_user.feed.paginate(page: params[:page])
-      render 'static_pages/home'
+      render "static_pages/home"
     end
   end
 
@@ -42,7 +42,7 @@ class MicropostsController < ApplicationController
   def update
     respond_to do |format|
       if @micropost.update(micropost_params)
-        format.html { redirect_to @micropost, notice: 'Micropost was successfully updated.' }
+        format.html { redirect_to @micropost, notice: "Micropost was successfully updated." }
         format.json { render :show, status: :ok, location: @micropost }
       else
         format.html { render :edit }
@@ -55,11 +55,11 @@ class MicropostsController < ApplicationController
   # DELETE /microposts/1.json
   def destroy
     Micropost.find_by(id: params[:id]).destroy
-    flash[:succes] = 'Micropost was succesfully deleted'
-    if request.referrer.nil? || request.referrer == microposts_url
+    flash[:succes] = "Micropost was succesfully deleted"
+    if request.referer.nil? || request.referer == microposts_url
       redirect_to root_url
     else
-      redirect_to request.referrer
+      redirect_to request.referer
     end
   end
 

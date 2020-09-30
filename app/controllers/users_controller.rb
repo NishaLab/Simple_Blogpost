@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :set_user, only: %i[show edit update destroy]
-  before_action :logged_in_user, only: %i[index show edit update following followers]
-  before_action :correct_user, only: %i[edit update]
-  before_action :admin_user, only: %i[destroy]
+  before_action :set_user, only: %i(show edit update destroy)
+  before_action :logged_in_user, only: %i(index show edit update following followers)
+  before_action :correct_user, only: %i(edit update)
+  before_action :admin_user, only: %i(destroy)
 
   # GET /users
   # GET /users.json
@@ -17,7 +17,7 @@ class UsersController < ApplicationController
   def show
     @user = User.find(params[:id])
     @microposts = @user.microposts.paginate(page: params[:page])
-    redirect_to root_url and return unless @user.activated?
+    redirect_to(root_url) && return unless @user.activated?
   end
 
   # GET /users/new
@@ -36,10 +36,10 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       @user.send_activation_email
-      flash[:info] = 'Please check your email to activate your account.'
+      flash[:info] = "Please check your email to activate your account."
       redirect_to root_url
     else
-      render 'users/new'
+      render "users/new"
     end
   end
 
@@ -47,11 +47,11 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1.json
   def update
     if @user.update(user_params)
-      flash.now[:success] = 'Edit Successed'
+      flash.now[:success] = "Edit Successed"
       redirect_to @user
     else
-      flash.now[:danger] = 'Edit Failed'
-      render 'edit'
+      flash.now[:danger] = "Edit Failed"
+      render "edit"
     end
   end
 
@@ -59,22 +59,22 @@ class UsersController < ApplicationController
   # DELETE /users/1.json
   def destroy
     User.find_by(id: params[:id]).destroy
-    flash.now[:succes] = 'User was succesfully deleted'
+    flash.now[:succes] = "User was succesfully deleted"
     redirect_to users_url
   end
 
   def following
-    @title = 'Following'
+    @title = "Following"
     @user = User.find(params[:id])
     @users = @user.following.paginate(page: params[:page])
-    render 'show_follow'
+    render "show_follow"
   end
 
   def followers
-    @title = 'Followers'
+    @title = "Followers"
     @user = User.find(params[:id])
     @users = @user.followers.paginate(page: params[:page])
-    render 'show_follow'
+    render "show_follow"
   end
 
   private
