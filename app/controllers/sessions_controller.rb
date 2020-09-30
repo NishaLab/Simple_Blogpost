@@ -38,7 +38,7 @@ class SessionsController < ApplicationController
       redirect_to forwarding_url || @user
       flash[:succes] = "Login successful"
     else
-      flash[:danger] = @user.errors.full_messsages.join("\n")
+      flash[:danger] = @user.errors.full_messages.join("\n")
       redirect_to login_path
     end
   end

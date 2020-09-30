@@ -44,6 +44,7 @@ gem "bootsnap", ">= 1.4.2", require: false
 gem "rubocop", "0.71", require: false
 # Google Authen
 gem "dotenv-rails"
+gem "figaro"
 gem "omniauth"
 gem "omniauth-google-oauth2"
 
@@ -66,6 +67,7 @@ group :test do
   gem "capybara", ">= 2.15"
   gem "minitest-reporters", "~> 1.1", ">= 1.1.7"
   gem "rspec-rails", "~> 4.0.1"
+  gem "rails-helper"
   gem "selenium-webdriver"
   # Easy installation and use of web drivers to run system tests with browsers
   gem "webdrivers"
