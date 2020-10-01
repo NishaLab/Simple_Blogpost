@@ -46,6 +46,7 @@ gem "rubocop", "0.71", require: false
 gem "dotenv-rails"
 gem "figaro"
 gem "omniauth"
+gem "omniauth-facebook"
 gem "omniauth-google-oauth2"
 
 group :development, :test do
