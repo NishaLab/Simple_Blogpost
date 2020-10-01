@@ -11,4 +11,5 @@
   <% if current_user?(micropost.user) %>
     <%= link_to "delete", micropost, method: :delete, data: { confirm: "You sure?" } %>
   <% end %>
+  <%= render 'shared/reaction_bar' %>
 </li>
