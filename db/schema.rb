@@ -46,7 +46,7 @@ ActiveRecord::Schema.define(version: 2020_10_01_074258) do
 
   create_table "reactions", force: :cascade do |t|
     t.integer "user_id"
-    t.integer "post_id"
+    t.integer "micropost_id"
     t.integer "image_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
