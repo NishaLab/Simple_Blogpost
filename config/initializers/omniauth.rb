@@ -3,5 +3,5 @@ Rails.application.config.middleware.use OmniAuth::Builder do
            ENV["GOOGLE_CLIENT_ID"], ENV["GOOGLE_CLIENT_SECRET"], skip_jwt: true
 end
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :facebook,  ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_APP_SECRET"]
+  provider :facebook, ENV["FACEBOOK_APP_ID"], ENV["FACEBOOK_APP_SECRET"]
 end
