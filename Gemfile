@@ -42,6 +42,12 @@ gem "jbuilder", "~> 2.7"
 # Reduces boot times through caching; required in config/boot.rb
 gem "bootsnap", ">= 1.4.2", require: false
 gem "rubocop", "0.71", require: false
+# Google Authen
+gem "dotenv-rails"
+gem "figaro"
+gem "omniauth"
+gem "omniauth-facebook"
+gem "omniauth-google-oauth2"
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -61,6 +67,8 @@ group :test do
   # Adds support for Capybara system testing and selenium driver
   gem "capybara", ">= 2.15"
   gem "minitest-reporters", "~> 1.1", ">= 1.1.7"
+  gem "rails-helper"
+  gem "rspec-rails", "~> 4.0.1"
   gem "selenium-webdriver"
   # Easy installation and use of web drivers to run system tests with browsers
   gem "webdrivers"
