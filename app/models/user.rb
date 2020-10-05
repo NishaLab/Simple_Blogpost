@@ -89,7 +89,7 @@ class User < ApplicationRecord
   def self.from_omniauth access_token
     data = access_token.info
     # handle if user exist in database
-    user = User.where(email: data["email"]).first
+    user = User.find_by(email: data["email"])
     # handle if user isn't exist in database
     password = SecureRandom.urlsafe_base64
     user || User.create(name: data["name"], email: data["email"],
