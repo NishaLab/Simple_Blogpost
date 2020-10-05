@@ -10,13 +10,14 @@
   </span>
   <div class="row reaction">
     <% (1..4).each do |id| %>
-      <%= form_with(model: reaction, local: true, class:"form-img #{id}") do |form| %>
+      <%= form_with(model: current_user.reactions.build, local: true, class:"form-img #{id}") do |form| %>
         <%= hidden_field_tag :micropost, micropost.id %>
+        <%= hidden_field_tag :image_id, id %>
         <%= image_submit_tag("/assets/#{id}.png",class: "search-img #{id}") %>
         <% if micropost.reactions.find_by(image_id: id).nil?%>
           <span> 0 </span>
         <%else%>
-          <span> <%= micropost.reactions.find_by(image_id: id).count %> </span>
+          <span> <%= micropost.reactions.where(image_id: id).count %> </span>
         <%end%>
       <%end%>
     <%end%>
