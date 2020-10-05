@@ -13,12 +13,12 @@
       <%= form_with(model: current_user.reactions.build, remote: true, class:"form-img #{id}") do |form| %>
         <%= hidden_field_tag :micropost, micropost.id %>
         <%= hidden_field_tag :image_id, id %>
-        <%= image_submit_tag("/assets/#{id}.png",class: "search-img #{id}") %>
+        <%= image_submit_tag("/assets/#{id}.png",class: "search-img #{id}",name: "img-submit-#{id}") %>
         <% reactions = get_all_reaction_by_image_id(micropost.id, id)%>
         <% if reactions.first %>
-          <span> <%= reactions.count %> </span>
+          <%= content_tag(:span,reactions.count,id: "react-count-#{id}") %>
         <%else%>
-          <span> 0 </span>
+          <%= content_tag(:span,0,id: "react-count-#{id}") %>
         <%end%>
       <%end%>
     <%end%>
