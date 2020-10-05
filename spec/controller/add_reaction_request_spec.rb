@@ -14,7 +14,7 @@ RSpec.describe ReactionsController, type: :controller do
     log_in user
   end
   after(:each) do
-    DatabaseCleaner.clean_with(:truncation)
+    DatabaseCleaner.clean_with(:transaction)
   end 
   it "should add reaction with valid information" do
     expect { post :create, params: react_params }.to change(Reaction, :count).by(1)
