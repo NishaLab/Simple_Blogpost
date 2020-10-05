@@ -2,21 +2,15 @@ class ReactionsController < ApplicationController
   before_action :logged_in_user
 
   def create
-    user_id = current_user.id
     micropost_id = params[:micropost]
     image_id = params[:image_id]
-    react_count = Reaction.where(micropost_id: micropost_id, user_id: user_id).limit(1).count
-    @react = Reaction.find_by(micropost_id: micropost_id, user_id: user_id, image_id: image_id) ||
-            current_user.reactions.build(micropost_id: params[:micropost], image_id: params[:image_id])
-
+    # if user already reacted to this post with other react -> destroy other react
+    Reaction.where(micropost_id: micropost_id, user_id: current_user.id).where.not(image_id: params[:image_id]).destroy_all
+    @react = current_user.reactions.build(micropost_id: params[:micropost], image_id: params[:image_id])
     # if react exist -> destroy
-    if @react.persisted?
-      @react.destroy
+    if Reaction.exists?(user_id: current_user.id, micropost_id: params[:micropost])
+      Reaction.find_by(user_id: current_user.id, micropost_id: params[:micropost]).destroy
       redirect_to request.referer || root_url
-    # if user already react to this post -> destroy other react -> save this react
-    elsif react_count == 1
-      Reaction.where(micropost_id: micropost_id, user_id: user_id).delete_all
-      save(@react)
     # if not -> save this react
     else save(@react) end
   end
