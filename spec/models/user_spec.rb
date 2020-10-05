@@ -6,8 +6,8 @@ RSpec.describe User, type: :model do
       provider: "google",
       uid: "12345678910",
       info: {
-        email: "hungtest@gmail.com",
-        name: "Hung Test"
+        email: "hungtestmail@gmail.com",
+        name: "Hung123"
       },
       credentials: {
         token: "abcdefg12345",
@@ -16,9 +16,8 @@ RSpec.describe User, type: :model do
       }
     )
     new_user = User.from_omniauth(OmniAuth.config.mock_auth[:google_oauth2])
-
-    expect(new_user.email).to eq("hungtest@gmail.com")
-    expect(new_user.name).to eq("Hung Test")
+    expect(new_user.email).to eq("hungtestmail@gmail.com")
+    expect(new_user.name).to eq("Hung123")
   end
 end
 
@@ -28,8 +27,8 @@ RSpec.describe User, type: :model do
       provider: "facebook",
       uid: "12345678910",
       info: {
-        email: "hungtest@gmail.com",
-        name: "Hung Test"
+        email: "hungtestmail@gmail.com",
+        name: "Hung123"
       },
       credentials: {
         token: "abcdefg12345",
@@ -38,8 +37,7 @@ RSpec.describe User, type: :model do
       }
     )
     new_user = User.from_omniauth(OmniAuth.config.mock_auth[:facebook])
-
-    expect(new_user.email).to eq("hungtest@gmail.com")
-    expect(new_user.name).to eq("Hung Test")
+    expect(new_user.email).to eq("hungtestmail@gmail.com")
+    expect(new_user.name).to eq("Hung123")
   end
 end
