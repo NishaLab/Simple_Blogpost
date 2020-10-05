@@ -1,4 +1,3 @@
-<% provide(:post,micropost)%>
 <li id="micropost-<%= micropost.id %>">
   <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
   <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
@@ -9,14 +8,17 @@
   <span class="timestamp">
     Posted <%= time_ago_in_words(micropost.created_at) %> ago.
   </span>
-  <div class="row">
+  <div class="row reaction">
     <% (1..4).each do |id| %>
-    <%= link_to image_tag("#{id}.png", alt: "Reaction Icon",width: 16, height: 16),"#"%>
-    <% if micropost.reactions.find_by(image_id: id).nil?%>
-    0
-    <%else%>
-    <% micropost.reactions.find_by(image_id: id).count %>
-    <%end%>
+      <%= form_with(model: reaction, local: true, class:"form-img #{id}") do |form| %>
+        <%= hidden_field_tag :micropost, micropost.id %>
+        <%= image_submit_tag("/assets/#{id}.png",class: "search-img #{id}") %>
+        <% if micropost.reactions.find_by(image_id: id).nil?%>
+          <span> 0 </span>
+        <%else%>
+          <span> <%= micropost.reactions.find_by(image_id: id).count %> </span>
+        <%end%>
+      <%end%>
     <%end%>
   </div>
   <% if current_user?(micropost.user) %>
