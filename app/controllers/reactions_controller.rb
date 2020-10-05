@@ -2,10 +2,9 @@ class ReactionsController < ApplicationController
   before_action :logged_in_user
 
   def create
-    micropost_id = params[:micropost]
-    image_id = params[:image_id]
     # if user already reacted to this post with other react -> destroy other react
-    Reaction.where(micropost_id: micropost_id, user_id: current_user.id).where.not(image_id: params[:image_id]).destroy_all
+    Reaction.where(micropost_id: params[:micropost],
+                   user_id: current_user.id).where.not(image_id: params[:image_id]).destroy_all
     @react = current_user.reactions.build(micropost_id: params[:micropost], image_id: params[:image_id])
     # if react exist -> destroy
     if Reaction.exists?(user_id: current_user.id, micropost_id: params[:micropost])
