@@ -22,10 +22,10 @@ RSpec.describe ReactionsController, type: :controller do
     expect { post :create, params: react_params }.to change(Reaction, :count).by(-1)
     expect(Reaction.where(id: react.id).count).to eq(0)
   end
-
+  
   it "should only has only 1 reaction per micropost per user" do
     log_in user
-    react = FactoryBot.create(:reaction, user_id: user.id, micropost_id: micropost.id, image_id: "1")
+    react = FactoryBot.create(:reaction, user_id: user.id, micropost_id: micropost.id, image_id: "2")
 
     post :create, params: react_params
     expect(Reaction.where(user_id: user.id, micropost_id: micropost.id, image_id: "1").count).to eq(1)
