@@ -2,11 +2,11 @@ require "rails_helper"
 
 RSpec.feature "user react" do
   scenario "micropost feed after login" do
-    user = FactoryBot.create(:user,email: "abcs12@gmail.com")
+    user = FactoryBot.create(:user, email: "abcs12@gmail.com")
     micropost = FactoryBot.create(:micropost, user_id: user.id)
     visit login_path
-    fill_in "Email", :with => user.email
-    fill_in "Password", :with => user.password
+    fill_in "Email", with: user.email
+    fill_in "Password", with: user.password
     click_button "Login"
     visit root_url
     expect(page).to have_content("Micropost Feed")

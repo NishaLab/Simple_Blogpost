@@ -71,9 +71,9 @@ group :test do
   gem "rspec-rails", "~> 4.0.1"
   gem "selenium-webdriver"
   # Easy installation and use of web drivers to run system tests with browsers
+  gem "database_cleaner-active_record"
   gem "factory_bot_rails"
   gem "webdrivers"
-  gem "database_cleaner-active_record"
   # Template testing
   gem "rails-controller-testing"
 end

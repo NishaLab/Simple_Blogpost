@@ -7,7 +7,7 @@ RSpec.describe ReactionsController, type: :controller do
     {
       user_id: user.id,
       micropost: micropost.id,
-      image_id: "1",
+      image_id: "1"
     }
   }
   before(:each) do
@@ -15,7 +15,7 @@ RSpec.describe ReactionsController, type: :controller do
   end
   after(:each) do
     DatabaseCleaner.clean_with(:transaction)
-  end 
+  end
   it "should add reaction with valid information" do
     expect { post :create, params: react_params }.to change(Reaction, :count).by(1)
   end
