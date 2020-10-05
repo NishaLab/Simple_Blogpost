@@ -10,19 +10,20 @@
   </span>
   <div class="row reaction">
     <% (1..4).each do |id| %>
-      <%= form_with(model: current_user.reactions.build, local: true, class:"form-img #{id}") do |form| %>
+      <%= form_with(model: current_user.reactions.build, remote: true, class:"form-img #{id}") do |form| %>
         <%= hidden_field_tag :micropost, micropost.id %>
         <%= hidden_field_tag :image_id, id %>
         <%= image_submit_tag("/assets/#{id}.png",class: "search-img #{id}") %>
-        <% if micropost.reactions.find_by(image_id: id).nil?%>
-          <span> 0 </span>
+        <% reactions = get_all_reaction_by_image_id(micropost.id, id)%>
+        <% if reactions.first %>
+          <span> <%= reactions.count %> </span>
         <%else%>
-          <span> <%= micropost.reactions.where(image_id: id).count %> </span>
+          <span> 0 </span>
         <%end%>
       <%end%>
     <%end%>
   </div>
   <% if current_user?(micropost.user) %>
-  <%= link_to "delete", micropost, method: :delete, data: { confirm: "You sure?" } %>
+    <%= link_to "delete", micropost, method: :delete, data: { confirm: "You sure?" } %>
   <% end %>
 </li>
