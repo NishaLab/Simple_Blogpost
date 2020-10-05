@@ -1,7 +1,6 @@
 require "rails_helper"
 
 RSpec.describe Reaction, type: :model do
-
   it "is not valid without user id" do
     react = Reaction.new(user_id: nil)
     expect(react).to_not be_valid

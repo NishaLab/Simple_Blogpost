@@ -12,22 +12,22 @@ class ReactionsController < ApplicationController
     # if react exist -> destroy
     if @react.persisted?
       @react.destroy
-      redirect_to request.referrer || root_url
+      redirect_to request.referer || root_url
     # if user already react to this post -> destroy other react -> save this react
     elsif react_count == 1
       Reaction.where(micropost_id: micropost_id, user_id: user_id).delete_all
       save(@react)
     # if not -> save this react
-    else save(@react)     end
+    else save(@react) end
   end
 
   def save react
     if react.save
       flash[:success] = "React created successfully"
-      redirect_to request.referrer || root_url
+      redirect_to request.referer || root_url
     else
       flash[:danger] = "Failed to create react"
-      render "static_pages/home"      
+      render "static_pages/home"
     end
   end
 
