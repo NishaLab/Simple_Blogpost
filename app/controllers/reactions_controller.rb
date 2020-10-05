@@ -6,21 +6,25 @@ class ReactionsController < ApplicationController
     Reaction.where(micropost_id: params[:micropost],
                    user_id: current_user.id).where.not(image_id: params[:image_id]).destroy_all
     @react = current_user.reactions.build(micropost_id: params[:micropost], image_id: params[:image_id])
-    # if react exist -> destroy
-    if Reaction.exists?(user_id: current_user.id, micropost_id: params[:micropost])
-      Reaction.find_by(user_id: current_user.id, micropost_id: params[:micropost]).destroy
-      redirect_to request.referer || root_url
-    # if not -> save this react
-    else save(@react) end
-  end
 
-  def save react
-    if react.save
-      flash[:success] = "React created successfully"
-      redirect_to request.referer || root_url
-    else
-      flash[:danger] = "Failed to create react"
-      render "static_pages/home"
+    # if react exist -> destroy
+    respond_to do |format|
+      if Reaction.exists?(user_id: current_user.id, micropost_id: params[:micropost])
+        Reaction.find_by(user_id: current_user.id, micropost_id: params[:micropost]).destroy
+        format.html {redirect_to request.referer || root_url}
+        format.json { render :show }
+
+        # if not -> save this react
+
+      elsif @react.save
+        flash[:success] = "React created successfully"
+        format.html {redirect_to request.referer || root_url}
+        format.json { render :show }
+      else
+        flash[:danger] = "Failed to create react"
+        format.html {redirect_to request.referer || root_url}
+        format.json { render :show }
+      end
     end
   end
 
