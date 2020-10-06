@@ -9,12 +9,33 @@ RSpec.feature "user react" do
     fill_in "Password", with: user.password
     click_button "Login"
     visit root_url
-    expect(page).to have_content("Micropost Feed")
+
+    expect(page).to have_css(".microposts")
     expect(page).to have_content(micropost.content)
 
     expect(page).to have_css("input[name=img-submit-1]")
     expect(page).to have_css("input[name=img-submit-2]")
     expect(page).to have_css("input[name=img-submit-3]")
     expect(page).to have_css("input[name=img-submit-4]")
+
+    expect(page).to have_css("#react-count-1")
+    expect(page).to have_css("#react-count-2")
+    expect(page).to have_css("#react-count-3")
+    expect(page).to have_css("#react-count-4")
+
+    find('input[name="img-submit-1"]').click
+
+    expect(page).to have_css(".microposts")
+    expect(page).to have_content(micropost.content)
+
+    expect(page).to have_css("input[name=img-submit-1]")
+    expect(page).to have_css("input[name=img-submit-2]")
+    expect(page).to have_css("input[name=img-submit-3]")
+    expect(page).to have_css("input[name=img-submit-4]")
+
+    expect(page).to have_css("#react-count-1")
+    expect(page).to have_css("#react-count-2")
+    expect(page).to have_css("#react-count-3")
+    expect(page).to have_css("#react-count-4")
   end
 end
