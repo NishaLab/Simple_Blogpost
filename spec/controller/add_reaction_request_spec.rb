@@ -8,7 +8,7 @@ RSpec.describe ReactionsController, type: :controller do
       user_id: user.id,
       micropost: micropost.id,
       image_id: "1",
-      format: "js",
+      format: "js"
     }
   }
   before(:each) do
@@ -33,5 +33,9 @@ RSpec.describe ReactionsController, type: :controller do
     post :create, params: react_params
     expect(Reaction.where(user_id: user.id, micropost_id: micropost.id, image_id: "1").count).to eq(1)
     expect(Reaction.where(id: react.id).count).to eq(0)
+  end
+  it "should re render the current page" do
+    post :create, params: react_params
+    expect(response).to render_template(:create)
   end
 end

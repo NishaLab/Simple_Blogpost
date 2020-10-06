@@ -18,7 +18,7 @@ class ReactionsController < ApplicationController
       else
         flash[:danger] = I18n.t "Failed to create react"
       end
-      format.html 
+      format.html
       format.js
     end
   end
