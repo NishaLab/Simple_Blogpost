@@ -14,9 +14,9 @@ class ReactionsController < ApplicationController
         # if not -> save this react
 
       elsif @react.save
-        flash[:success] = "React created successfully"
+        flash[:success] = I18n.t "React created successfully"
       else
-        flash[:danger] = "Failed to create react"
+        flash[:danger] = I18n.t "Failed to create react"
       end
       format.js { render inline: "location.reload();" }
     end

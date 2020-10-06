@@ -31,3 +31,5 @@
 
 en:
   hello: "Hello world"
+  React created successfully: "React created successfully"
+  Failed to create react: "Failed to create react"
