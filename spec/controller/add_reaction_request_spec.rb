@@ -7,7 +7,8 @@ RSpec.describe ReactionsController, type: :controller do
     {
       user_id: user.id,
       micropost: micropost.id,
-      image_id: "1"
+      image_id: "1",
+      format: "js",
     }
   }
   before(:each) do

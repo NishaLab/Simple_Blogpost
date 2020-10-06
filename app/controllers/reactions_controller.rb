@@ -11,20 +11,14 @@ class ReactionsController < ApplicationController
     respond_to do |format|
       if Reaction.exists?(user_id: current_user.id, micropost_id: params[:micropost])
         Reaction.find_by(user_id: current_user.id, micropost_id: params[:micropost]).destroy
-        format.html {redirect_to request.referer || root_url}
-        format.json { render :show }
-
         # if not -> save this react
 
       elsif @react.save
         flash[:success] = "React created successfully"
-        format.html {redirect_to request.referer || root_url}
-        format.json { render :show }
       else
         flash[:danger] = "Failed to create react"
-        format.html {redirect_to request.referer || root_url}
-        format.json { render :show }
       end
+      format.js { render inline: "location.reload();" }
     end
   end
 
