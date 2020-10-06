@@ -6,7 +6,7 @@ class ReactionsController < ApplicationController
     Reaction.where(micropost_id: params[:micropost],
                    user_id: current_user.id).where.not(image_id: params[:image_id]).destroy_all
     @react = current_user.reactions.build(micropost_id: params[:micropost], image_id: params[:image_id])
-
+    @span_id = "#{params[:micropost]}-react-count-#{params[:image_id]}"
     # if react exist -> destroy
     respond_to do |format|
       if Reaction.exists?(user_id: current_user.id, micropost_id: params[:micropost])
@@ -18,7 +18,8 @@ class ReactionsController < ApplicationController
       else
         flash[:danger] = I18n.t "Failed to create react"
       end
-      format.js { render inline: "location.reload();" }
+      format.html 
+      format.js
     end
   end
 

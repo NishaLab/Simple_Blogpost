@@ -8,20 +8,8 @@
   <span class="timestamp">
     Posted <%= time_ago_in_words(micropost.created_at) %> ago.
   </span>
-  <div class="row reaction">
-    <% (1..4).each do |id| %>
-      <%= form_with(model: current_user.reactions.build, remote: true, class:"form-img #{id}") do |form| %>
-        <%= hidden_field_tag :micropost, micropost.id %>
-        <%= hidden_field_tag :image_id, id %>
-        <%= image_submit_tag("/assets/#{id}.png", class: "search-img #{id}",name: "img-submit-#{id}") %>
-        <% reactions = get_all_reaction_by_image_id(micropost.id, id)%>
-        <% if reactions.first %>
-          <%= content_tag(:span,reactions.count, id: "react-count-#{id}") %>
-        <%else%>
-          <%= content_tag(:span,0, id: "react-count-#{id}") %>
-        <%end%>
-      <%end%>
-    <%end%>
+  <div class="row reaction" id ="reaction_bar">
+    <%= render  'microposts/reaction',micropost: micropost %>
   </div>
   <% if current_user?(micropost.user) %>
     <%= link_to "delete", micropost, method: :delete, data: { confirm: "You sure?" } %>
