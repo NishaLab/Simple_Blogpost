@@ -8,15 +8,16 @@ class ReactionsController < ApplicationController
     @react = current_user.reactions.build(micropost_id: params[:micropost], image_id: params[:image_id])
     @span_id = "#{params[:micropost]}-react-count-#{params[:image_id]}"
     # if react exist -> destroy
+    reaction = Reaction.find_by(user_id: current_user.id, micropost_id: params[:micropost])
     respond_to do |format|
-      if Reaction.exists?(user_id: current_user.id, micropost_id: params[:micropost])
-        Reaction.find_by(user_id: current_user.id, micropost_id: params[:micropost]).destroy
+      if !reaction.nil?
+        reaction.destroy
         # if not -> save this react
 
       elsif @react.save
-        flash[:success] = I18n.t "React created successfully"
+        flash[:success] = I18n.t "react.success"
       else
-        flash[:danger] = I18n.t "Failed to create react"
+        flash[:danger] = I18n.t "react.failed"
       end
       format.html
       format.js
