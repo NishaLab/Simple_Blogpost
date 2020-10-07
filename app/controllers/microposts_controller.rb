@@ -28,6 +28,7 @@ class MicropostsController < ApplicationController
   def create
     @micropost = current_user.microposts.build(micropost_params)
     @micropost.image.attach(params[:micropost][:image])
+    @micropost.parent_id = params[:parent_id]
     if @micropost.save
       flash[:succes] = "Post is created"
       redirect_to root_url

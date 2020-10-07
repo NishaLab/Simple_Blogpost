@@ -8,7 +8,7 @@
       <%= render 'shared/user_info' %>
     </section>
     <section class="micropost_form">
-      <%= render 'shared/micropost_form' %>
+      <%= render 'shared/micropost_form', parent_id: nil %>
     </section>
     <section class="stats">
       <%= render 'shared/stat' %>
@@ -27,6 +27,6 @@
   <% if not logged_in? %>
   <%= link_to "Sign up now!", 'users/new', class: "btn btn-lg btn-primary center", id: "sign_up_btn" %>
   <% end %>
-  <%= link_to image_tag("kitten.jpg",alt: "kitten",width:200,height:200 ),"" %>
+  <%= link_to image_tag("kitten.jpg",alt: "kitten",width:200,height:200 ), "" %>
 </div>
 <%end %>
