@@ -10,7 +10,7 @@ class ReactionsController < ApplicationController
     # if react exist -> destroy
     reaction = Reaction.find_by(user_id: current_user.id, micropost_id: params[:micropost])
     respond_to do |format|
-      if !reaction.nil?
+      if reaction.present?
         reaction.destroy
         # if not -> save this react
 
