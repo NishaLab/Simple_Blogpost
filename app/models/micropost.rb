@@ -3,7 +3,7 @@
 # simple micropost class has 1 attribute: content
 class Micropost < ApplicationRecord
   belongs_to :user
-  belongs_to :parent, class_name: "Micropost"
+  belongs_to :parent, class_name: "Micropost", optional: true
   has_one_attached :image
   has_many :reactions, dependent: :destroy
   has_many :childs, class_name: "Micropost",
