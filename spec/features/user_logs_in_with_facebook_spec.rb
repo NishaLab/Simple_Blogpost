@@ -21,7 +21,7 @@ def stub_omniauth_facebook
     uid: "123",
     info: {
       email: "hungtest@gmail.com",
-      name: "Hung Test123"
+      name: "Hung Test"
     },
     credentials: {
       token: "abcdefg12345",

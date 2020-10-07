@@ -1,0 +1,7 @@
+<% (1..4).each do |id| %>
+  <% if id == @react.image_id%>
+    $('#<%= @react.micropost_id %>-react-count-<%= @react.image_id %>').html("<%= Reaction.where(micropost_id: @react.micropost_id, image_id: @react.image_id).count %>")
+  <% else %>
+    $('#<%= @react.micropost_id %>-react-count-<%= id %>').html("0")
+  <% end %>
+<% end %>
