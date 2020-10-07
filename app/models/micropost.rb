@@ -3,9 +3,11 @@
 # simple micropost class has 1 attribute: content
 class Micropost < ApplicationRecord
   belongs_to :user
+  belongs_to :parent, class_name: "Micropost"
   has_one_attached :image
   has_many :reactions, dependent: :destroy
-
+  has_many :childs, class_name: "Micropost",
+                   foreign_key: "parent_id", dependent: :destroy
   default_scope -> { order(created_at: :desc) }
   validates :content, length: { maximum: 140 }, presence: true
   validates :user_id, presence: true
