@@ -34,3 +34,6 @@ en:
   react:
     success: "React created successfully"
     failed: "Failed to create react"
+  comment:
+    success: "Comment created successfully"
+    failed: "Failed to create comment"

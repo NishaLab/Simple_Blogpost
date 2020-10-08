@@ -30,13 +30,13 @@ class MicropostsController < ApplicationController
     @micropost.image.attach(params[:micropost][:image])
     @micropost.parent_id = params[:parent_id]
     if @micropost.save
-      flash[:succes] = "Post is created"
+      flash[:succes] =  I18n.t "comment.success"
       respond_to do |format|
         format.html
         format.js
       end
     else
-      flash[:danger] = "Failed to create post"
+      flash[:danger] = I18n.t "comment.failed"
       redirect_to request.referer || root_url
     end
   end
