@@ -2,4 +2,8 @@
   $('.microposts ul:first').before(
   "<%= escape_javascript(render 'microposts/micropost', micropost: @micropost).html_safe %>"
   )
+<% else %>
+  $('#comment-<%= @micropost.parent_id %>').before(
+  "<%= escape_javascript(render 'shared/comment', micropost: @micropost).html_safe %>"
+  )
 <% end %>
