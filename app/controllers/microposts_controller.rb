@@ -30,7 +30,7 @@ class MicropostsController < ApplicationController
     @micropost.image.attach(params[:micropost][:image])
     @micropost.parent_id = params[:parent_id]
     if @micropost.save
-      flash[:succes] =  I18n.t "comment.success"
+      flash[:succes] = I18n.t "comment.success"
       respond_to do |format|
         format.html
         format.js

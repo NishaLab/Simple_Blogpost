@@ -11,7 +11,7 @@ RSpec.describe MicropostsController, type: :controller do
       format: "js"
     }
   }
-  let(:comment_params) {
+  let!(:comment_params) {
     {
       micropost: { content: "hung12345" },
       user_id: user.id,
@@ -29,7 +29,7 @@ RSpec.describe MicropostsController, type: :controller do
   end
 
   it "should create comment with valid infomation" do
-    expect { post :create, params: comment_params }.to change(Micropost, :count).by(2) &&
+    expect { post :create, params: comment_params }.to change(Micropost, :count).by(1) &&
                                                       change(parent.childs, :count).by(1)
   end
 
