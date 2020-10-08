@@ -9,6 +9,14 @@ class MicropostsController < ApplicationController
   # GET /microposts.json
   def index
     @microposts = Micropost.all
+    @parents = Micropost.where(user_id: current_user.id,parent_id: nil)
+    respond_to do |format|
+      format.html
+      file_name = "export_micropost_"+ Time.zone.now.to_s
+      format.xlsx {
+        response.headers["Content-Disposition"] = "attachment; filename=#{file_name}.xlsx"
+      }
+    end
   end
 
   # GET /microposts/1
@@ -30,7 +38,7 @@ class MicropostsController < ApplicationController
     @micropost.image.attach(params[:micropost][:image])
     @micropost.parent_id = params[:parent_id]
     if @micropost.save
-      flash[:succes] =  I18n.t "comment.success"
+      flash[:succes] = I18n.t "comment.success"
       respond_to do |format|
         format.html
         format.js

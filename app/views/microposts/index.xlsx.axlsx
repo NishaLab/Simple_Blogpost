@@ -1,0 +1,7 @@
+wb = xlsx_package.workbook
+wb.add_worksheet(name: "Microposts") do |sheet|
+  sheet.add_row %w(user content)
+  @parents.each do |micropost|
+    sheet.add_row [micropost.user_id, micropost.content]
+  end
+end
