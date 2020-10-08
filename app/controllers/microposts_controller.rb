@@ -31,10 +31,13 @@ class MicropostsController < ApplicationController
     @micropost.parent_id = params[:parent_id]
     if @micropost.save
       flash[:succes] = "Post is created"
-      redirect_to root_url
+      respond_to do |format|
+        format.html
+        format.js
+      end
     else
-      @feed_items = current_user.feed.paginate(page: params[:page])
-      render "static_pages/home"
+      flash[:danger] = "Failed to create post"
+      redirect_to request.referer || root_url
     end
   end
 

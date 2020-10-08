@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
         reset_session
         log_in(@user)
         params[:session][:remember_me] == "1" ? remember(@user) : forget(@user)
-        redirect_to forwarding_url || @user
+        redirect_to forwarding_url || root_url
       else
         message = "Account not activated\n"
         message += "Check your email for the activation link."
@@ -35,7 +35,7 @@ class SessionsController < ApplicationController
       forwarding_url = session[:forwarding_url]
       reset_session
       log_in(@user)
-      redirect_to forwarding_url || @user
+      redirect_to forwarding_url || root_url
       flash[:succes] = "Login successful"
     else
       flash[:danger] = @user.errors.full_messages.join("\n")

@@ -1,0 +1,5 @@
+<% if @micropost.parent_id.nil? %>
+  $('.microposts ul:first').before(
+  "<%= escape_javascript(render 'microposts/micropost', micropost: @micropost).html_safe %>"
+  )
+<% end %>
