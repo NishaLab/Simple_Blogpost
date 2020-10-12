@@ -79,29 +79,21 @@ class UsersController < ApplicationController
 
   def export
     compressed_filestream = Zip::OutputStream.write_buffer do |zos|
-      filename = "export_posts_#{Time.zone.now.to_s}.xlsx"
-      content = render_to_string xlsx: "export_followers.xlsx", filename: filename
-      @_response_body = nil
-      zos.put_next_entry(filename)
-      zos.print content
-
-      filename = "export_followers_#{Time.zone.now.to_s}.xlsx"
-      content = render_to_string xlsx: "export_followers.xlsx", filename: filename
-      @_response_body = nil
-      zos.put_next_entry(filename)
-      zos.print content
-
-      filename = "export_followings_#{Time.zone.now.to_s}.xlsx"
-      content = render_to_string xlsx: "export_followers.xlsx", filename: filename
-      @_response_body = nil
-      zos.put_next_entry(filename)
-      zos.print content
+      export_file zos, "posts" , "export_posts"
+      export_file zos, "followers" , "export_followers"
+      export_file zos, "followings" , "export_followings"
     end
     compressed_filestream.rewind
     send_data compressed_filestream.read, filename: "export_#{Time.zone.now.to_s}.zip", type: "application/zip"
   end
 
-
+  def export_file zos, title, template
+    filename = "export_#{title}_#{Time.zone.now.to_s}.xlsx"
+    content = render_to_string xlsx: "#{template}.xlsx", filename: filename
+    @_response_body = nil
+    zos.put_next_entry(filename)
+    zos.print content
+  end
 
   private
 
