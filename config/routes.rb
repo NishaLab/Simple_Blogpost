@@ -5,11 +5,12 @@ Rails.application.routes.draw do
   get "/about", to: "static_pages#about"
   get "/contact", to: "static_pages#contact"
   get "/sign_up", to: "users#new"
+  get "/users/:id/export", to: "users#export", as: "export"
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
   get "/auth/:provider/callback", to: "sessions#omniauth"
-  resources :microposts, only: %i(create destroy index)
+  resources :microposts, only: %i(create destroy)
   resources :users
   resources :account_activation, only: [:edit]
   resources :password_resets, only: %i(new create edit update)

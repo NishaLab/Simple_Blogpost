@@ -1,0 +1,8 @@
+wb = xlsx_package.workbook
+parents = Micropost.where(user_id: current_user.id,parent_id: nil).where("created_at > ?", 1.month.ago)
+wb.add_worksheet(name: "Microposts") do |sheet|
+  sheet.add_row %w(date content)
+  parents.each do |micropost|
+    sheet.add_row [micropost.created_at, micropost.content]
+  end
+end
