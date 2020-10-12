@@ -77,6 +77,32 @@ class UsersController < ApplicationController
     render "show_follow"
   end
 
+  def export
+    compressed_filestream = Zip::OutputStream.write_buffer do |zos|
+      filename = "export_posts_#{Time.zone.now.to_s}.xlsx"
+      content = render_to_string xlsx: "export_followers.xlsx", filename: filename
+      @_response_body = nil
+      zos.put_next_entry(filename)
+      zos.print content
+
+      filename = "export_followers_#{Time.zone.now.to_s}.xlsx"
+      content = render_to_string xlsx: "export_followers.xlsx", filename: filename
+      @_response_body = nil
+      zos.put_next_entry(filename)
+      zos.print content
+
+      filename = "export_followings_#{Time.zone.now.to_s}.xlsx"
+      content = render_to_string xlsx: "export_followers.xlsx", filename: filename
+      @_response_body = nil
+      zos.put_next_entry(filename)
+      zos.print content
+    end
+    compressed_filestream.rewind
+    send_data compressed_filestream.read, filename: "export_#{Time.zone.now.to_s}.zip", type: "application/zip"
+  end
+
+
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
