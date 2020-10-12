@@ -30,7 +30,7 @@ RSpec.describe MicropostsController, type: :controller do
 
   it "should create comment with valid infomation" do
     expect { post :create, params: comment_params }.to change(Micropost, :count).by(1) &&
-                                                      change(parent.childs, :count).by(1)
+                                                      change(parent.child_posts, :count).by(1)
   end
 
   it "should re render the current page" do

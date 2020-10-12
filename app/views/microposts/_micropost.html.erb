@@ -20,7 +20,7 @@
   </div>
   <div class= "row comment">
     <section id = "comment-<%= micropost.id%>">
-      <% for micropost in micropost.childs%>
+      <% micropost.child_posts.each do |micropost| %>
         <%= render  'shared/comment', micropost: micropost %>
       <% end %>
     </section>
