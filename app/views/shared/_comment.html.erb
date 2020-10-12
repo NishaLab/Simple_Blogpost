@@ -1,4 +1,4 @@
-<ul id="micropost-<%= micropost.id %>">
+<li id="micropost-<%= micropost.id %>">
   <%= link_to gravatar_for(micropost.user, size: 50), micropost.user %>
   <span class="user"><%= link_to micropost.user.name, micropost.user %></span>
   <span class="content">
@@ -10,23 +10,10 @@
   </span>
   <div class="row reaction" id ="reaction_bar">
     <section>
-      <%= render 'microposts/reaction', micropost: micropost%>
+      <%= render  'microposts/reaction', micropost: micropost %>
     </section>
   </div>
-  <div class="row comment_form">
-    <section>
-      <%= render 'shared/micropost_form', parent_id: micropost.id %>
-    </section>
-  </div>
-  <div class= "row comment">
-    <section id = "comment-<%= micropost.id%>">
-      <% micropost.child_posts.each do |micropost| %>
-        <%= render  'shared/comment', micropost: micropost %>
-      <% end %>
-    </section>
-  </div>
-
   <% if current_user?(micropost.user) %>
     <%= link_to "delete", micropost, method: :delete, data: { confirm: "You sure?" } %>
   <% end %>
-</ul>
+</li>

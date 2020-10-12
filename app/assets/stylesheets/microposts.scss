@@ -12,8 +12,15 @@
 .microposts {
   list-style: none;
   padding: 0;
+  border-bottom: 1px solid gray;
+  ul{
+    border-bottom: 1px solid gray;
+    border-top: 1px solid gray;
+    padding-top: 10px;
+    padding-bottom: 10px;
+  }
   li {
-    padding: 10px 0;
+    padding: 10px 0px 0px 50px ;
     border-top: 1px solid #e8e8e8;
   }
   a:visited {

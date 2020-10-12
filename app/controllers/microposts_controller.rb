@@ -28,12 +28,16 @@ class MicropostsController < ApplicationController
   def create
     @micropost = current_user.microposts.build(micropost_params)
     @micropost.image.attach(params[:micropost][:image])
+    @micropost.parent_id = params[:parent_id]
     if @micropost.save
-      flash[:succes] = "Post is created"
-      redirect_to root_url
+      flash[:succes] = I18n.t "comment.success"
+      respond_to do |format|
+        format.html
+        format.js
+      end
     else
-      @feed_items = current_user.feed.paginate(page: params[:page])
-      render "static_pages/home"
+      flash[:danger] = I18n.t "comment.failed"
+      redirect_to request.referer || root_url
     end
   end
 
