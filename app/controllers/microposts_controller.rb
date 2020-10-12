@@ -9,6 +9,13 @@ class MicropostsController < ApplicationController
   # GET /microposts.json
   def index
     @microposts = Micropost.all
+    respond_to do |format|
+      format.html
+      file_name = "export_micropost_"+ Time.zone.now.to_s
+      format.xlsx {
+        response.headers["Content-Disposition"] = "attachment; filename=#{file_name}.xlsx"
+      }
+    end
   end
 
   # GET /microposts/1

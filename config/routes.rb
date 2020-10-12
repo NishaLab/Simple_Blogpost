@@ -9,7 +9,7 @@ Rails.application.routes.draw do
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
   get "/auth/:provider/callback", to: "sessions#omniauth"
-  resources :microposts, only: %i(create destroy)
+  resources :microposts, only: %i(create destroy index)
   resources :users
   resources :account_activation, only: [:edit]
   resources :password_resets, only: %i(new create edit update)
