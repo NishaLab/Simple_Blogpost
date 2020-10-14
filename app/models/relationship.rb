@@ -5,6 +5,10 @@ class Relationship < ApplicationRecord
   belongs_to :followed, class_name: "User"
   validates :follower_id, presence: true
   validates :followed_id, presence: true
+
+  scope :followers, ->(user_id) { where(followed_id: user_id).where("created_at > ?", 1.month.ago) }
+  scope :followings, ->(user_id) { where(follower_id: user_id).where("created_at > ?", 1.month.ago) }
+
   FOLLOWER_ATTRIBUTES = %w(follower_name created_at).freeze
   FOLLOWING_ATTRIBUTES = %w(following_name created_at).freeze
 

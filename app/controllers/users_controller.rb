@@ -78,23 +78,14 @@ class UsersController < ApplicationController
   end
 
   def export
-    posts = ExportCsvService.new Micropost
-      .where(user_id: current_user.id, parent_id: nil)
-      .where("created_at > ?", 1.month.ago), Micropost::MICROPOST_ATTRIBUTES
-
-    followings = ExportCsvService.new Relationship.where(follower_id: current_user.id)
-      .where("created_at > ?", 1.month.ago), Relationship::FOLLOWING_ATTRIBUTES
-
-    followers = ExportCsvService.new Relationship.where(followed_id: current_user.id)
-      .where("created_at > ?", 1.month.ago), Relationship::FOLLOWER_ATTRIBUTES
-
+    csv = ExportCsvService.new
     compressed_filestream = Zip::OutputStream.write_buffer do |zos|
       zos.put_next_entry "export_posts.csv"
-      zos.print posts.perform
+      zos.print csv.export_posts current_user.id
       zos.put_next_entry "export_followers.csv"
-      zos.print followers.perform
+      zos.print csv.export_followers current_user.id
       zos.put_next_entry "export_followings.csv"
-      zos.print followings.perform
+      zos.print csv.export_followings current_user.id
     end
     compressed_filestream.rewind
     send_data compressed_filestream.read, filename: "export_for_user_#{current_user.id}_#{Time.zone.now}.zip"

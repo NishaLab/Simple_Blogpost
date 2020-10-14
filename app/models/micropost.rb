@@ -3,6 +3,8 @@
 # simple micropost class has 1 attribute: content
 class Micropost < ApplicationRecord
   MICROPOST_ATTRIBUTES = %w(content created_at).freeze
+  scope :recent_posts, ->(user_id) { where(user_id: user_id, parent_id: nil).where("created_at > ?", 1.month.ago) }
+
   belongs_to :user
   belongs_to :parent_post, class_name: "Micropost", optional: true
   has_one_attached :image
