@@ -16,6 +16,5 @@ class ExportCsvService
     end
   end
 
-  private
   attr_reader :attributes, :objects
 end

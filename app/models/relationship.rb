@@ -5,8 +5,8 @@ class Relationship < ApplicationRecord
   belongs_to :followed, class_name: "User"
   validates :follower_id, presence: true
   validates :followed_id, presence: true
-  FOLLOWING_ATTRIBUTES = %w(follower_name created_at).freeze
-  FOLLOWER_ATTRIBUTES = %w(following_name created_at).freeze
+  FOLLOWER_ATTRIBUTES = %w(follower_name created_at).freeze
+  FOLLOWING_ATTRIBUTES = %w(following_name created_at).freeze
 
   def follower_name
     self.follower.name

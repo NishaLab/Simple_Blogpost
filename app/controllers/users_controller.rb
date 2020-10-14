@@ -83,10 +83,10 @@ class UsersController < ApplicationController
       .where("created_at > ?", 1.month.ago), Micropost::MICROPOST_ATTRIBUTES
 
     followings = ExportCsvService.new Relationship.where(follower_id: current_user.id)
-      .where("created_at > ?", 1.month.ago), Relationship::FOLLOWER_ATTRIBUTES
+      .where("created_at > ?", 1.month.ago), Relationship::FOLLOWING_ATTRIBUTES
 
     followers = ExportCsvService.new Relationship.where(followed_id: current_user.id)
-      .where("created_at > ?", 1.month.ago), Relationship::FOLLOWING_ATTRIBUTES
+      .where("created_at > ?", 1.month.ago), Relationship::FOLLOWER_ATTRIBUTES
 
     compressed_filestream = Zip::OutputStream.write_buffer do |zos|
       zos.put_next_entry "export_posts.csv"
