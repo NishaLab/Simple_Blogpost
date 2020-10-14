@@ -2,6 +2,7 @@
 
 # simple micropost class has 1 attribute: content
 class Micropost < ApplicationRecord
+  MICROPOST_ATTRIBUTES = %w(content created_at).freeze
   belongs_to :user
   belongs_to :parent_post, class_name: "Micropost", optional: true
   has_one_attached :image

@@ -4,16 +4,14 @@ class ExportCsvService
   def initialize objects, attributes
     @attributes = attributes
     @objects = objects
-    @header = attributes.map { |attr| "header_csv.#{attr}" }
-    binding.pry
+    @header = attributes.map { |attr| I18n.t("header_csv.#{attr}") }
   end
 
   def perform
-    binding.pry
     CSV.generate do |csv|
       csv << @header
       @objects.each do |object|
-        csv << @attributes.map{ |attr| object.public_send(attr) }
+        csv << @attributes.map { |attr| object.public_send(attr) }
       end
     end
   end

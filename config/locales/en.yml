@@ -37,3 +37,8 @@ en:
   comment:
     success: "Comment created successfully"
     failed: "Failed to create comment"
+  header_csv:
+    follower_name: "Follower Name"
+    following_name: "Following Name"
+    created_at: "Created At"
+    content: "Content"
