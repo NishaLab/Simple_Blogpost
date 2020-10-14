@@ -1,8 +1,0 @@
-wb = xlsx_package.workbook
-followers = Relationship.where(followed_id: current_user.id).where("created_at > ?", 1.month.ago)
-wb.add_worksheet(name: "Follower") do |sheet|
-  sheet.add_row %w(user follow_date)
-  followers.each do |follower|
-    sheet.add_row [follower.follower.name, follower.created_at]
-  end
-end
