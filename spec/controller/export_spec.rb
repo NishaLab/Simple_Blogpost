@@ -17,12 +17,5 @@ RSpec.describe UsersController, type: :controller do
     expect(response.header["Content-Type"]).to eq("application/zip")
     expect(response.header["Content-Disposition"]).to eq("attachment; filename=\"export_#{user.id}.zip\";" +
                                                          " filename*=UTF-8''export_#{user.id}.zip")
-    Zip::InputStream.open(StringIO.new(response.parsed_body())) do |io|
-      while (entry = io.get_next_entry)
-        binding.pry
-        puts "Contents of #{entry.name}: '#{io.read}'"
-      end
-    end
-
   end
 end

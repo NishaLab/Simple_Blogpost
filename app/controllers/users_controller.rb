@@ -78,27 +78,13 @@ class UsersController < ApplicationController
   end
 
   def export
-    @compressed_filestream = Zip::OutputStream.write_buffer do |zos|
-      export_file zos, "posts" , "export_posts"
-      export_file zos, "followers" , "export_followers"
-      export_file zos, "followings" , "export_followings"
+    csv = ExportCsvService.new Relationship.where(follower_id: current_user.id).where("created_at > ?", 1.month.ago), Relationship::CSV_ATTRIBUTES
+    respond_to do |format|
+      format.csv { send_data csv.perform,
+        filename: "users.csv" }
     end
-    @compressed_filestream.rewind
-    send_data @compressed_filestream.read, filename: "export_#{current_user.id.to_s}.zip", type: "application/zip"
   end
 
-  def export_file zos, title, template
-    filename = "export_#{title}_#{current_user.id.to_s}.xlsx"
-    content = render_to_string xlsx: "#{template}.xlsx", filename: filename
-    @_response_body = nil
-    zos.put_next_entry(filename)
-    zos.print content
-  end
-
-  def export_xlsx title, template
-    filename = "export_#{title}_#{current_user.id.to_s}.xlsx"
-    render xlsx: "#{template}.xlsx", filename: filename
-  end
   private
 
   # Use callbacks to share common setup or constraints between actions.
