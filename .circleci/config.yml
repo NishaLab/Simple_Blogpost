@@ -44,13 +44,13 @@ jobs:
               - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
               - v1-gem-cache-{{ arch }}-{{ .Branch }}-
               - v1-gem-cache-{{ arch }}-
-      - run: bundle exec rails webpacker:compile
       - run: bundle install --path vendor/bundle
 
       - save_cache:
             paths:
               - ~/.bundle
             key: v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+      - run: bundle exec rails webpacker:compile
 
 
       - run: bundle exec rails db:migrate
