@@ -30,13 +30,13 @@ jobs:
 
       - type: cache-restore
         name: Restore bundle cache
-        key: blog_ruby-{{ checksum "Gemfile.lock" }}
+        key: blog_ruby {{ checksum "Gemfile.lock" }}
 
       - run: bundle install --path vendor/bundle
 
       - type: cache-save
         name: Store bundle cache
-        key: blog_ruby-{{ checksum "Gemfile.lock" }}
+        key: blog_ruby {{ checksum "Gemfile.lock" }}
         paths:
           - vendor/bundle
       - run: bundle exec rails db:migrate
