@@ -27,9 +27,16 @@ jobs:
       - run:
           name: Which bundler?
           command: bundle -v
-      - run: bundle install
+      - run: bundle install --path vendor/bundle
+
+      - type: cache-save
+        name: Store bundle cache
+        key: blog_ruby-{{ checksum "Gemfile.lock" }}
+        paths:
+          - vendor/bundle
       - run: bundle exec rails db:migrate
       - run: bundle exec rails db:seed
+      - run: bundle exec rails webpacker:install
       - run: NODE_ENV=test bundle exec rails webpacker:compile
       - run: bundle exec rubocop
       - run: rspec
