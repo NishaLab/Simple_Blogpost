@@ -11,6 +11,9 @@
     <section class="stats">
       <%= render 'shared/stat' %>
     </section>
+    <section class="stats">
+      <%= link_to "export micropost as excel", export_path(format: :csv) %>
+    </section>
   </aside>
   <div class="col-md-8">
     <% if @user.microposts.any? %>

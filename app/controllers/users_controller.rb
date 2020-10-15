@@ -77,6 +77,20 @@ class UsersController < ApplicationController
     render "show_follow"
   end
 
+  def export
+    csv = ExportCsvService.new
+    compressed_filestream = Zip::OutputStream.write_buffer do |zos|
+      zos.put_next_entry "export_posts.csv"
+      zos.print csv.export_posts current_user.id
+      zos.put_next_entry "export_followers.csv"
+      zos.print csv.export_followers current_user.id
+      zos.put_next_entry "export_followings.csv"
+      zos.print csv.export_followings current_user.id
+    end
+    compressed_filestream.rewind
+    send_data compressed_filestream.read, filename: "export_for_user_#{current_user.id}_#{Time.zone.now}.zip"
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.
