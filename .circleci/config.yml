@@ -45,4 +45,5 @@ jobs:
 
       - run: bundle exec rails db:migrate
       - run: bundle exec rails db:seed
-
+      - run: bundle exec rubocop
+      - run: buncle exec rspec
