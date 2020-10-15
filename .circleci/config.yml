@@ -14,7 +14,7 @@ jobs:
         environment:
           POSTGRES_USER: blog_ruby
           POSTGRES_DB: blog_ruby_test
-          POSTGRES_PASSWORD: ""
+          POSTGRES_PASSWORD: "0963063105"
     executor: ruby/default
     steps:
       - checkout
