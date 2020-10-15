@@ -8,15 +8,17 @@ RSpec.describe ExportCsvService, type: :model do
 
   let!(:micropost) { FactoryBot.create(:micropost, user_id: user.id) }
 
+  before(:each) do
+    @csv = ExportCsvService.new
+  end
   it "should create correct microposts data" do
     post = user.microposts.create(content: "Adasdas", created_at: 2.months.ago)
     comment = Micropost.create(parent_id: micropost.id, user_id: user.id, content: "Comment")
-    csv = ExportCsvService.new
-    csv.export_posts(user.id)
-    expect(csv.attributes).to eq(Micropost::MICROPOST_ATTRIBUTES)
-    expect(csv.objects).not_to include(post)
-    expect(csv.objects).not_to include(comment)
-    expect(csv.objects).to include(micropost)
+    @csv.export_posts(user.id)
+    expect(@csv.attributes).to eq(Micropost::MICROPOST_ATTRIBUTES)
+    expect(@csv.objects).not_to include(post)
+    expect(@csv.objects).not_to include(comment)
+    expect(@csv.objects).to include(micropost)
   end
 
   it "should create correct followers data" do
@@ -24,13 +26,12 @@ RSpec.describe ExportCsvService, type: :model do
     rel2 = Relationship.create(follower_id: user3.id, followed_id: user.id, created_at: 2.months.ago)
     rel3 = Relationship.create(follower_id: user.id, followed_id: user4.id, created_at: 2.months.ago)
 
-    csv = ExportCsvService.new
-    csv.export_followers(user.id)
-    expect(csv.attributes).to eq(Relationship::FOLLOWER_ATTRIBUTES)
+    @csv.export_followers(user.id)
+    expect(@csv.attributes).to eq(Relationship::FOLLOWER_ATTRIBUTES)
 
-    expect(csv.objects).not_to include(rel3)
-    expect(csv.objects).not_to include(rel2)
-    expect(csv.objects).to include(rel1)
+    expect(@csv.objects).not_to include(rel3)
+    expect(@csv.objects).not_to include(rel2)
+    expect(@csv.objects).to include(rel1)
   end
 
   it "should create correct followings data" do
@@ -38,12 +39,11 @@ RSpec.describe ExportCsvService, type: :model do
     rel2 = Relationship.create(follower_id: user.id, followed_id: user3.id, created_at: 2.months.ago)
     rel3 = Relationship.create(follower_id: user4.id, followed_id: user.id, created_at: 2.months.ago)
 
-    csv = ExportCsvService.new
-    csv.export_followings(user.id)
-    expect(csv.attributes).to eq(Relationship::FOLLOWING_ATTRIBUTES)
+    @csv.export_followings(user.id)
+    expect(@csv.attributes).to eq(Relationship::FOLLOWING_ATTRIBUTES)
 
-    expect(csv.objects).not_to include(rel3)
-    expect(csv.objects).not_to include(rel2)
-    expect(csv.objects).to include(rel1)
+    expect(@csv.objects).not_to include(rel3)
+    expect(@csv.objects).not_to include(rel2)
+    expect(@csv.objects).to include(rel1)
   end
 end
