@@ -27,6 +27,11 @@ jobs:
       - run:
           name: Which bundler?
           command: bundle -v
+
+      - type: cache-restore
+        name: Restore bundle cache
+        key: blog_ruby-{{ checksum "Gemfile.lock" }}
+
       - run: bundle install --path vendor/bundle
 
       - type: cache-save
