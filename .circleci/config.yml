@@ -28,17 +28,21 @@ jobs:
           name: Which bundler?
           command: bundle -v
 
-      # - type: cache-restore
-      #   name: Restore bundle cache
-      #   key: blog_ruby {{ checksum "Gemfile.lock" }}
+      - restore_cache:
+            keys:
+              # when lock file changes, use increasingly general patterns to restore cache
+              - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+              - v1-gem-cache-{{ arch }}-{{ .Branch }}-
+              - v1-gem-cache-{{ arch }}-
 
       - run: bundle install --path vendor/bundle
 
-      # - type: cache-save
-      #   name: Store bundle cache
-      #   key: blog_ruby {{ checksum "Gemfile.lock" }}
-      #   paths:
-      #     - vendor/bundle
+      - save_cache:
+            paths:
+              - ~/.bundle
+            key: v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+
+
       - run: bundle exec rails db:migrate
       - run: bundle exec rails db:seed
 
