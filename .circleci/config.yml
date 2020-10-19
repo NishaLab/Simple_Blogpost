@@ -4,10 +4,11 @@ orbs:
   heroku: circleci/heroku@1.2.2
 workflows:
   heroku_deploy:
+    environment:
+      HEROKU_API_KEY: "912e56fa-d1f3-472b-90c5-2630a57781bb"
+      HEROKU_APP: "hung-blog-bunbusoft"
     jobs:
       - build
-        environment:
-          HEROKU_API_KEY: "912e56fa-d1f3-472b-90c5-2630a57781bb"
       - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
           requires:
             - build
