@@ -237,6 +237,7 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
+    redis (4.2.2)
     regexp_parser (1.8.1)
     rspec-core (3.9.2)
       rspec-support (~> 3.9.3)
@@ -355,6 +356,7 @@ DEPENDENCIES
   rails-controller-testing
   rails-helper
   rails-i18n
+  redis (~> 4.0)
   rspec-rails (~> 4.0.1)
   rubocop (= 0.71)
   rubocop-performance
