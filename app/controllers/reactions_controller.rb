@@ -16,6 +16,7 @@ class ReactionsController < ApplicationController
         # if not -> save this react
 
       elsif @react.save
+        NotificationMailer.new_notification(@react).deliver_now
         flash[:success] = I18n.t "react.success"
       else
         flash[:danger] = I18n.t "react.failed"

@@ -76,6 +76,14 @@ Rails.application.configure do
     domain: "heroku.com",
     enable_starttls_auto: true
   }
+  config.action_mailer.smtp_settings = {
+    address: "smtp.gmail.com",
+    port: 587,
+    user_name: ENV["GOOGLE_USERNAME"],
+    password: ENV["GOOGLE_PASSWORD"],
+    authentication: "plain",
+    enable_starttls_auto: true
+  }
   # Ignore bad email addresses and do not raise email delivery errors.
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
