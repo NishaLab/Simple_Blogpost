@@ -6,7 +6,7 @@ workflows:
   heroku_deploy:
     jobs:
       - build
-      - deploy # Use the pre-configured job, deploy-via-git
+      - deploys: # Use the pre-configured job, deploy-via-git
           requires:
             - build
           filters:
