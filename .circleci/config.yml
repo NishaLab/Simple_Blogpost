@@ -37,21 +37,24 @@ jobs:
       - run:
           name: Which bundler?
           command: bundle -v
+      - run: bundle clean --force
 
       - restore_cache:
             keys:
               # when lock file changes, use increasingly general patterns to restore cache
-              - v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
-              - v1-gem-cache-{{ arch }}-{{ .Branch }}-
-              - v1-gem-cache-{{ arch }}-
+              - gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+              - gem-cache-v1-{{ arch }}-{{ .Branch }}
+              - gem-cache-v1
+
       - run: bundle install --path vendor/bundle
 
       - save_cache:
-            paths:
-              - ~/.bundle
-            key: v1-gem-cache-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          key: gem-cache-v1-{{ arch }}-{{ .Branch }}-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+      - run: yarn add webpack-cli
       - run: bundle exec rake webpacker:compile
-
+      - run: bundle exec rake assets:precompile
 
       - run: bundle exec rails db:migrate
       - run: bundle exec rails db:seed
