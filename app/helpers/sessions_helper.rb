@@ -45,7 +45,7 @@ module SessionsHelper
 
   def notifications
     post = "SELECT id FROM microposts WHERE user_id = :user_id"
-    Reaction.where("micropost_id IN (#{post})",user_id: current_user.id)
+    Reaction.where("micropost_id IN (#{post})", user_id: current_user.id)
   end
 
   def store_location

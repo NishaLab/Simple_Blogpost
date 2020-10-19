@@ -11,6 +11,7 @@ class ReactionsController < ApplicationController
     reaction = Reaction.find_by(user_id: current_user.id, micropost_id: params[:micropost])
     respond_to do |format|
       if reaction.present?
+        NotificationBroadcastJob.perform_later(reaction, true)
         reaction.destroy
         # if not -> save this react
 
