@@ -6,14 +6,15 @@ workflows:
   heroku_deploy:
     jobs:
       - build
+        environment:
+          HEROKU_API_KEY: "912e56fa-d1f3-472b-90c5-2630a57781bb"
       - heroku/deploy-via-git: # Use the pre-configured job, deploy-via-git
           requires:
             - build
           filters:
             branches:
               only: master
-          environment:
-            HEROKU_API_KEY: "912e56fa-d1f3-472b-90c5-2630a57781bb"
+      
 jobs:
   build:
     docker:
