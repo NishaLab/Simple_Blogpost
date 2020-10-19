@@ -12,7 +12,7 @@ workflows:
           filters:
             branches:
               only: master
-          environments:
+          environment:
             HEROKU_API_KEY: "912e56fa-d1f3-472b-90c5-2630a57781bb"
 jobs:
   build:
