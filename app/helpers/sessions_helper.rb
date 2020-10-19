@@ -43,6 +43,11 @@ module SessionsHelper
     cookies.delete(:remember_token)
   end
 
+  def notifications
+    post = "SELECT id FROM microposts WHERE user_id = :user_id"
+    Reaction.where("micropost_id IN (#{post})",user_id: current_user.id)
+  end
+
   def store_location
     session[:forwarding_url] = request.original_url if request.get?
   end
