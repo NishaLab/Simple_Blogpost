@@ -367,7 +367,7 @@ DEPENDENCIES
   tzinfo-data
   web-console (>= 3.3.0)
   webdrivers
-  webpacker (~> 4.0)
+  webpacker
   will_paginate (= 3.3.0)
 
 RUBY VERSION
