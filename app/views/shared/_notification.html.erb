@@ -1,5 +1,5 @@
 <li>
-  <a href="microposts/<%= reaction.micropost_id %>">
+  <a href="/microposts/<%= reaction.micropost_id %>">
   User <%= reaction.user.name %> has reacted to your post at <%= distance_of_time_in_words(reaction.created_at, Time.zone.now)%> ago
   </a>
 </li>
