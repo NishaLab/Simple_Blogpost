@@ -21,8 +21,6 @@ jobs:
           PGHOST: localhost
           PGUSER: blog_ruby
           RAILS_ENV: test
-          HEROKU_API_KEY: "912e56fa-d1f3-472b-90c5-2630a57781bb"
-          HEROKU_APP: "hung-blog-bunbusoft"
       - image: postgres:10.14
         environment:
           POSTGRES_USER: blog_ruby
