@@ -6,4 +6,4 @@ test:
 
 production:
   adapter: redis
-  url: ENV["Redis"]
+  url: <%= ENV.fetch["REDIS"] %>
