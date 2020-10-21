@@ -14,14 +14,13 @@ consumer.subscriptions.create("NotificationsChannel", {
     var $counter, val;
     $counter = $("#notification-counter");
     val = parseInt($counter.text());
-    console.log(data.destroy)
     if(data.destroy == true){
       $("#notification-"+ data.reaction.id).html("");
-      val-=1;
+      val -= 1;
     }
     else{
       $("#notification-menu").prepend("" + data.notification);
-      val+=1;
+      val += 1;
     }
     return $counter.text(val)
   },

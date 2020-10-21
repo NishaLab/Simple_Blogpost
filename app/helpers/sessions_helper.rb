@@ -43,9 +43,9 @@ module SessionsHelper
     cookies.delete(:remember_token)
   end
 
-  def notifications
-    post = "SELECT id FROM microposts WHERE user_id = :user_id"
-    Reaction.where("micropost_id IN (#{post})", user_id: current_user.id)
+  def get_all_notifications
+    post = Micropost.where(user_id: current_user.id).pluck(:id)
+    Reaction.where(micropost_id: post)
   end
 
   def store_location
