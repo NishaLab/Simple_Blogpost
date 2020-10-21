@@ -1,6 +1,8 @@
 GEM
   remote: https://rubygems.org/
   specs:
+    action-cable-testing (0.6.1)
+      actioncable (>= 5.0)
     actioncable (6.0.3.3)
       actionpack (= 6.0.3.3)
       nio4r (~> 2.0)
@@ -327,6 +329,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  action-cable-testing
   active_storage_validations (= 0.8.9)
   axlsx
   bcrypt (= 3.1.13)

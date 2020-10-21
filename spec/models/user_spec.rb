@@ -40,4 +40,3 @@ RSpec.describe User, type: :model do
     expect(new_user.name).to eq("Hung123")
   end
 end
-

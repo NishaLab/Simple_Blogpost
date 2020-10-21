@@ -61,8 +61,9 @@ Rails.application.configure do
   # Use a real queuing backend for Active Job (and separate queues per environment).
   # config.active_job.queue_adapter     = :resque
   # config.active_job.queue_name_prefix = "new_app_production"
-  config.web_socket_server_url = "wss://hung-blog-bunbusoft.herokuapp.com/cable" 
-  config.action_cable.allowed_request_origins = ['https:/hung-blog-bunbusoft.herokuapp.com', 'http://hung-blog-bunbusoft.herokuapp.com']
+  config.web_socket_server_url = "wss://hung-blog-bunbusoft.herokuapp.com/cable"
+  config.action_cable.allowed_request_origins = ["https:/hung-blog-bunbusoft.herokuapp.com",
+                                                 "http://hung-blog-bunbusoft.herokuapp.com"]
 
   config.action_mailer.perform_caching = false
   config.action_mailer.raise_delivery_errors = true

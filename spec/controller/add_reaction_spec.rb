@@ -16,7 +16,14 @@ RSpec.describe ReactionsController, type: :controller do
   end
 
   it "should add reaction with valid information" do
-    expect { post :create, params: react_params }.to change(Reaction, :count).by(1)
+    expect { post :create, params: react_params }.to(change(Reaction, :count).by(1)) &&
+                                                have_broadcasted_to("notification_channel").with(
+                                                  reaction: Reaction.first,
+                                                  notification: ApplicationController.renderer.render(
+                                                    partial: "shared/notification",
+                                                     locals: { reaction: Reaction.first }
+                                                  )
+                                                )
   end
 
   it "should destroy reaction with duplicate reaction" do
@@ -35,5 +42,12 @@ RSpec.describe ReactionsController, type: :controller do
   it "should re render the current page" do
     post :create, params: react_params
     expect(response).to render_template(:create)
+  end
+
+  it "send email" do
+    @react = user.reactions.create(image_id: 1, micropost_id: micropost.id)
+    expect {
+      NotificationMailer.new_notification(@react).deliver_now
+    }.to change { ActionMailer::Base.deliveries.count }.by(1)
   end
 end
