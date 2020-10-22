@@ -50,6 +50,9 @@ gem "figaro"
 gem "omniauth"
 gem "omniauth-facebook"
 gem "omniauth-google-oauth2"
+gem "cancancan"
+gem "devise"
+
 # il8n
 gem "rails-i18n"
 group :development, :test do
