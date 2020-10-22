@@ -15,7 +15,7 @@ consumer.subscriptions.create("NotificationsChannel", {
     $counter = $("#notification-counter");
     val = parseInt($counter.text());
     if(data.destroy == true){
-      $("#notification-"+ data.reaction.id).html("");
+      $(`#notification-${data.reaction.id}`).html("");
       val -= 1;
     }
     else{
