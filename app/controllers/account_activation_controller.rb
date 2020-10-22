@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class AccountActivationController < ApplicationController
+  check_authorization
   def edit
     user = User.find_by(email: params[:email])
     if user&.authenticated?(:activation, params[:id]) && !user.activated?
