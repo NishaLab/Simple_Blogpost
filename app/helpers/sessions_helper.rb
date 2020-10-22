@@ -48,6 +48,11 @@ module SessionsHelper
     Reaction.where(micropost_id: post)
   end
 
+  def get_all_unread_notifications
+    post = Micropost.where(user_id: current_user.id).pluck(:id)
+    Reaction.where(micropost_id: post, is_read: false)
+  end
+
   def store_location
     session[:forwarding_url] = request.original_url if request.get?
   end

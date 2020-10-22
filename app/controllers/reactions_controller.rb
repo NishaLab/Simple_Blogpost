@@ -17,6 +17,7 @@ class ReactionsController < ApplicationController
 
       elsif @react.save
         NotificationMailer.new_notification(@react).deliver_now
+        @react.micropost.user.update(read_notification: false)
         flash[:success] = I18n.t "react.success"
       else
         flash[:danger] = I18n.t "react.failed"
@@ -24,6 +25,11 @@ class ReactionsController < ApplicationController
       format.html
       format.js
     end
+  end
+
+  def update
+    @react = Reaction.find(params[:id])
+    @react.update(is_read: true)
   end
 
   def destroy; end

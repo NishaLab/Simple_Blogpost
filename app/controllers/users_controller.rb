@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
-  before_action :set_user, only: %i(show edit update destroy)
+  before_action :set_user, only: %i(show edit update destroy read_notification)
   before_action :logged_in_user, only: %i(index show edit update following followers)
   before_action :correct_user, only: %i(edit update)
   before_action :admin_user, only: %i(destroy)
@@ -89,6 +89,10 @@ class UsersController < ApplicationController
     end
     compressed_filestream.rewind
     send_data compressed_filestream.read, filename: "export_for_user_#{current_user.id}_#{Time.zone.now}.zip"
+  end
+
+  def read_notification
+    @user.update(read_notification: true)
   end
 
   private
