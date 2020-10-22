@@ -1,14 +1,32 @@
-<p id="notice"><%= notice %></p>
+<ul>
+  <%= link_to gravatar_for(@micropost.user, size: 50), @micropost.user %>
+  <div class="user"><%= link_to @micropost.user.name, @micropost.user %></div>
+  <div class="content">
+    <%= @micropost.content %>
+    <%= image_tag @micropost.display_image if @micropost.image.attached? %>
+  </div>
+  <div class="timestamp">
+    Posted <%= time_ago_in_words(@micropost.created_at) %> ago.
+  </div>
+  <div class="row reaction" id ="reaction_bar">
+    <section>
+      <%= render 'microposts/reaction', micropost: @micropost%>
+    </section>
+  </div>
+  <div class="row comment_form">
+    <section>
+      <%= render 'shared/micropost_form', parent_id: @micropost.id %>
+    </section>
+  </div>
+  <div class= "row comment">
+    <section id = "comment-<%= @micropost.id%>">
+      <% @micropost.child_posts.each do |micropost| %>
+        <%= render  'shared/comment', micropost: @micropost %>
+      <% end %>
+    </section>
+  </div>
 
-<p>
-  <strong>Content:</strong>
-  <%= @micropost.content %>
-</p>
-
-<p>
-  <strong>User:</strong>
-  <%= @micropost.user_id %>
-</p>
-
-<%= link_to 'Edit', edit_micropost_path(@micropost) %> |
-<%= link_to 'Back', microposts_path %>
+  <% if current_user?(@micropost.user) %>
+    <%= link_to "delete", @micropost, method: :delete, data: { confirm: "You sure?" } %>
+  <% end %>
+</ul>

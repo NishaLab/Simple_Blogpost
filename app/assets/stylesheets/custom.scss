@@ -1,5 +1,6 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+@import "font-awesome";
 
 @mixin box_sizing {
   -moz-box-sizing: border-box;
@@ -116,4 +117,12 @@ footer {
 }
 .users.follow {
   padding: 0;
+}
+.notification{
+  background: white;
+  border: none;
+  color: blue;
+  &.muted{
+    color: gray;
+  }
 }

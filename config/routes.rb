@@ -10,17 +10,20 @@ Rails.application.routes.draw do
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
   get "/auth/:provider/callback", to: "sessions#omniauth"
+  patch "/users/read/:id", to: "users#read_notification", as: "users_read"
+
   resources :microposts, only: %i(create destroy)
   resources :users
   resources :account_activation, only: [:edit]
   resources :password_resets, only: %i(new create edit update)
-  resources :reactions, only: %i(create destroy)
+  resources :reactions, only: %i(create destroy update)
   resources :users do
     member do
       get :following, :followers
     end
   end
   resources :relationships, only: %i(create destroy)
+  mount ActionCable.server => "/cable"
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
   root "static_pages#home"
 end

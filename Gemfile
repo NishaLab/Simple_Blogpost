@@ -32,10 +32,10 @@ gem "turbolinks", "~> 5"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "jbuilder", "~> 2.7"
 # Use Redis adapter to run Action Cable in production
-# gem 'redis', '~> 4.0'
+gem "redis", "~> 4.0"
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
-
+gem "font-awesome-rails"
 # Use Active Storage variant
 # gem 'image_processing', '~> 1.2'
 gem "axlsx"
@@ -75,9 +75,11 @@ group :test do
   gem "rspec-rails", "~> 4.0.1"
   gem "selenium-webdriver"
   # Easy installation and use of web drivers to run system tests with browsers
+  gem "action-cable-testing"
   gem "database_cleaner-active_record"
   gem "factory_bot_rails"
   gem "webdrivers"
+
   # Template testing
   gem "rails-controller-testing"
 end

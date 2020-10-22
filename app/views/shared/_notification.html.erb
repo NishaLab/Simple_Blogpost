@@ -1,0 +1,11 @@
+<li id = "notification-<%= reaction.id %>">
+  <%= form_with(model: reaction, remote: true, html: { method: :patch }) do |f| %>
+    <% unless reaction.is_read %>
+      <%= f.submit "User #{reaction.user.name} has reacted to your post at #{distance_of_time_in_words(reaction.created_at, Time.zone.now)}",
+      class: "notification" %>
+    <% else %>
+      <%= f.submit "User #{reaction.user.name} has reacted to your post at #{distance_of_time_in_words(reaction.created_at, Time.zone.now)}",
+      class: "notification muted" %>
+    <% end %>
+  <% end %>
+</li>

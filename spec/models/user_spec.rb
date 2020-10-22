@@ -1,6 +1,8 @@
 require "rails_helper"
 
 RSpec.describe User, type: :model do
+  let(:user) { FactoryBot.create(:user) }
+  let(:micropost) { FactoryBot.create(:micropost, user_id: user.id) }
   it "creates or updates itself from an google-auth hash" do
     OmniAuth.config.mock_auth[:google_oauth2] = OmniAuth::AuthHash.new(
       provider: "google",
@@ -19,9 +21,6 @@ RSpec.describe User, type: :model do
     expect(new_user.email).to eq("hungtestmail@gmail.com")
     expect(new_user.name).to eq("Hung123")
   end
-end
-
-RSpec.describe User, type: :model do
   it "creates or updates itself from an facebook hash" do
     OmniAuth.config.mock_auth[:facebook] = OmniAuth::AuthHash.new(
       provider: "facebook",
