@@ -17,12 +17,19 @@
           <% if logged_in? %>
           <li><%= link_to "Users", users_path %></li>
           <li class="dropdown">
-            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-              Notification <b class="notification"></b>  <span class="badge" id ="notification-counter"><%= get_all_notifications.count %></span>
+            <a href="/users/read/<%= current_user.id %>"  onclick="read_notification()" class="dropdown-toggle" data-toggle="dropdown" id="noti-dropdown">
+              Notification <b class="notification"></b> 
+              <span class="badge" id ="notification-counter">
+                <% unless current_user.read_notification %>
+                  <%= get_all_unread_notifications.count %>
+                <% else %>
+                  0
+                <% end %>
+              </span>
             </a>
             <ul class="dropdown-menu" id = "notification-menu">
-              <% get_all_notifications.each do |notification|%>
-                <%= render 'shared/notification', reaction: notification%>
+              <% get_all_notifications.each do |notification| %>
+                <%= render "shared/notification", reaction: notification %>
               <% end %>
             </ul>
           </li>
@@ -46,3 +53,12 @@
         <nav>
     </div>
   </header>
+<script type="text/javascript">
+  function read_notification() {
+      console.log($("#noti-dropdown").attr("href"))
+      $.ajax({
+        type: "PATCH",
+        url: $("#noti-dropdown").attr("href"),
+      })
+  }
+</script>
