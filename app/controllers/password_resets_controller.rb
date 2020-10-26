@@ -1,7 +1,6 @@
 # frozen_string_literal: true
 
 class PasswordResetsController < ApplicationController
-  load_and_authorize_resource
   before_action :set_user, only: %i(edit update)
   before_action :valid_user, only: %i(edit update)
   before_action :check_expiration, only: %i(edit update)
