@@ -5,7 +5,7 @@ FactoryBot.define do
     password_confirmation { "12345678" }
     name { "hung1234" }
     activated { true }
-    confirmation_at { Time.zone.now }
+    confirmed_at: { Time.zone.now }
     activated_at { Time.zone.now }
   end
 
