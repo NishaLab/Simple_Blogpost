@@ -12,9 +12,17 @@ class Users::ConfirmationsController < Devise::ConfirmationsController
   # end
 
   # GET /resource/confirmation?confirmation_token=abcdef
-  # def show
-  #   super
-  # end
+  def show
+    @user = User.confirm_by_token(params[:confirmation_token])
+    if @user.errors.empty?
+      flash[:succes] = "Account Activated"
+      log_in @user
+      redirect_to @user
+    else
+      flash[:danger] = "Account Activation Failed"
+      redirect_to root_url
+    end
+  end
 
   # protected
 
