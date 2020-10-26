@@ -45,13 +45,13 @@ gem "rubyzip"
 gem "bootsnap", ">= 1.4.2", require: false
 gem "rubocop", "0.71", require: false
 # Google Authen
+gem "cancancan"
+gem "devise"
 gem "dotenv-rails"
 gem "figaro"
 gem "omniauth"
 gem "omniauth-facebook"
 gem "omniauth-google-oauth2"
-gem "cancancan"
-gem "devise"
 
 # il8n
 gem "rails-i18n"

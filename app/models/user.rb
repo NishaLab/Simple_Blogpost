@@ -64,13 +64,14 @@ class User < ApplicationRecord
   end
 
   def create_reset_digest
-    self.reset_token = User.new_token
-    update_attribute(:reset_digest, User.digest(reset_token))
-    update_attribute(:reset_sent_at, Time.zone.now)
+    raw, hash = Devise.token_generator.generate(User, :reset_password_token)
+    self.reset_token = raw
+    update_attribute(:reset_password_token, hash)
+    update_attribute(:reset_password_sent_at, Time.zone.now)
   end
 
   def password_reset_expired?
-    reset_sent_at < 2.hours.ago
+    reset_password_sent_at < 2.hours.ago
   end
 
   def feed

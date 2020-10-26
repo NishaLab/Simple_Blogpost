@@ -4,7 +4,7 @@
 class ApplicationController < ActionController::Base
   include SessionsHelper
   rescue_from CanCan::AccessDenied do |exception|
-    redirect_to request.referer || root_url, :alert => exception.message
+    redirect_to request.referer || root_url, alert: exception.message
   end
   def hello
     render html: "Hello World"
