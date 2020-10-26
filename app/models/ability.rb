@@ -27,7 +27,7 @@ class Ability
       can [:read, :create], Relationship
       can [:update, :destroy], Relationship, follower_id: user.id
     else
-      can :new , User
+      can :create , User
     end
   end
 end
