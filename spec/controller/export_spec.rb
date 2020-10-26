@@ -17,4 +17,13 @@ RSpec.describe UsersController, type: :controller do
     expect(response.header["Content-Type"]).to eq("application/zip")
     expect(response.status).to eq(200)
   end
+  it "should not export other user data" do
+    user1 = FactoryBot.create(:user)
+    get :export, params: { id: user1.id }
+    expect(response.status).to eq(302)
+  end
+  it "should not see all users data" do
+    get :index
+    expect(response.status).to eq(302)
+  end
 end
