@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
 
   def create
     @user = User.find_by(email: params[:session][:email].downcase)
-    if @user&.valid_password?(params[:session][:password])
+    if @user&.valid_for_authentication? && @user&.valid_password?(params[:session][:password])
       if @user.activated?
         forwarding_url = session[:forwarding_url]
         reset_session
@@ -19,7 +19,17 @@ class SessionsController < ApplicationController
         redirect_to root_url
       end
     else
+      if @user.access_locked?
+        flash.now[:danger] = "Account locked"
+        return render "new"
+      end
       flash.now[:danger] = "Invalid email/password combination"
+      @user.increment_failed_attempts
+      flash.now[:danger] = "Last attempt" if @user.send(:last_attempt?)
+      if @user.send(:attempts_exceeded?)
+        @user.lock_access!
+        @user.send_unlock_instructions
+      end
       render "new"
     end
   end

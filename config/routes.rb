@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   devise_for :users, controllers: {
     registrations: "users/registrations",
     passwords: "users/passwords",
-    confirmations: "users/confirmations"
+    confirmations: "users/confirmations",
+    unlocks: "users/unlocks"
   }
   get "/help", to: "static_pages#help"
   get "/about", to: "static_pages#about"
