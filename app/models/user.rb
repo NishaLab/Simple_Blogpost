@@ -102,7 +102,8 @@ class User < ApplicationRecord
     user || User.create(name: data["name"], email: data["email"],
                          password: password,
                          password_confirmation: password,
-                         activated: true, activated_at: Time.zone.now)
+                         activated: true, activated_at: Time.zone.now,
+                         confirmed_at: Time.zone.now)
   end
 
   private
