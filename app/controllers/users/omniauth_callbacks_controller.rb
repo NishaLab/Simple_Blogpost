@@ -3,13 +3,25 @@
 class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # You should configure your model like this:
   # devise :omniauthable, omniauth_providers: [:twitter]
-  skip_before_action :verify_authenticity_token, only: :github
+  skip_before_action :verify_authenticity_token, only: %i(github facebook google_oauth2)
 
   # You should also create an action method in this controller like this:
   # def twitter
   # end
 
   def github
+    omniauth
+  end
+
+  def facebook
+    omniauth
+  end
+
+  def google_oauth2
+    omniauth
+  end
+
+  def omniauth
     @user = User.from_omniauth(request.env["omniauth.auth"])
     if @user.persisted? || @user.save
       forwarding_url = session[:forwarding_url]

@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
-  get "/auth/:provider/callback", to: "sessions#omniauth"
+  # get "/auth/:provider/callback", to: "sessions#omniauth"
   patch "/users/read/:id", to: "users#read_notification", as: "users_read"
 
   resources :microposts, only: %i(create destroy)
