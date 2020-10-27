@@ -51,8 +51,8 @@ gem "dotenv-rails"
 gem "figaro"
 gem "omniauth"
 gem "omniauth-facebook"
+gem "omniauth-github"
 gem "omniauth-google-oauth2"
-
 # il8n
 gem "rails-i18n"
 group :development, :test do

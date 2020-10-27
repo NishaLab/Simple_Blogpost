@@ -5,7 +5,8 @@ Rails.application.routes.draw do
     registrations: "users/registrations",
     passwords: "users/passwords",
     confirmations: "users/confirmations",
-    unlocks: "users/unlocks"
+    unlocks: "users/unlocks",
+    omniauth_callbacks: "users/omniauth_callbacks"
   }
   get "/help", to: "static_pages#help"
   get "/about", to: "static_pages#about"
