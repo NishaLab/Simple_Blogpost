@@ -105,7 +105,7 @@ class UsersController < ApplicationController
 
   def correct_user
     @user = User.find_by(id: params[:id])
-    redirect_to login_url unless current_user?(@user)
+    redirect_to login_url unless (current_user.has_role? :admin) || current_user?(@user)
   end
 
   # Only allow a list of trusted parameters through.

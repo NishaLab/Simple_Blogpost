@@ -2,6 +2,7 @@
 
 # simple micropost class has 1 attribute: content
 class Micropost < ApplicationRecord
+  resourcify
   MICROPOST_ATTRIBUTES = %w(content created_at).freeze
   scope :recent_posts, ->(user_id) { where(user_id: user_id, parent_id: nil).where("created_at > ?", 1.month.ago) }
 

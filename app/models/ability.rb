@@ -12,11 +12,11 @@ class Ability
       # User privilege for Micropost
       can :read, Micropost
       can :manage, Micropost, user_id: user.id
-      can :manage, Micropost if user.admin?
+      can :manage, Micropost if user.has_role? :admin
       # User privilege for User model
       can :show, User
       can [:update, :destroy, :export], User, id: user.id
-      can :manage, User if user.admin?
+      can :manage, User if user.has_role? :admin
 
       # User privilage for Reaction Model
       can :crud, Reaction

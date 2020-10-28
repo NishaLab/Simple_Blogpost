@@ -1,4 +1,5 @@
 class Reaction < ApplicationRecord
+  resourcify
   after_create_commit {
     NotificationBroadcastJob.perform_later(self)
   }

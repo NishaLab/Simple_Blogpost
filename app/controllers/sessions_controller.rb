@@ -18,6 +18,9 @@ class SessionsController < ApplicationController
         flash[:warning] = message
         redirect_to root_url
       end
+    elsif @user.nil?
+      flash[:danger] = "Invalid email/password combination"
+      redirect_to root_url
     else
       if @user.access_locked?
         flash.now[:danger] = "Account locked"
