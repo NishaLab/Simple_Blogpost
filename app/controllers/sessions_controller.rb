@@ -6,7 +6,7 @@ class SessionsController < ApplicationController
   def create
     @user = User.find_by(email: params[:session][:email].downcase)
     if @user&.valid_for_authentication? && @user&.valid_password?(params[:session][:password])
-      if @user.activated?
+      if @user.confirmed?
         forwarding_url = session[:forwarding_url]
         reset_session
         log_in(@user)
@@ -18,6 +18,9 @@ class SessionsController < ApplicationController
         flash[:warning] = message
         redirect_to root_url
       end
+    elsif @user.nil?
+      flash[:danger] = "Invalid email/password combination"
+      redirect_to root_url
     else
       if @user.access_locked?
         flash.now[:danger] = "Account locked"
