@@ -8,10 +8,10 @@ RSpec.describe MessagesController, type: :controller do
     {
       sender_id: user.id,
       receiver_id: user2.id,
-      message:{
-        content: "blah blah blah",
+      message: {
+        content: "blah blah blah"
       },
-      format: "js",
+      format: "js"
     }
   }
   before(:each) do
@@ -24,15 +24,15 @@ RSpec.describe MessagesController, type: :controller do
         message: Message.last,
         received_message: ApplicationController.renderer.render(
           partial: "shared/receiver",
-          locals: { message: Message.last },
+          locals: { message: Message.last }
         ),
         chat_window: ApplicationController.renderer.render(
           partial: "messages/chat_form",
           locals: { messages: Message.current_user_messages(Message.last.receiver.id),
                     receiver_id: Message.last.sender.id,
                     sender_id: Message.last.receiver.id,
-                    current_user: user },
-        ),
+                    current_user: user }
+        )
       )
   end
 end

@@ -1,4 +1,4 @@
-import consumer from "./consumer"
+import consumer from "./consumer";
 
 consumer.subscriptions.create("ChatRoomChannel", {
   connected() {
@@ -10,6 +10,11 @@ consumer.subscriptions.create("ChatRoomChannel", {
   },
 
   received(data) {
-    // Called when there's incoming data on the websocket for this channel
-  }
+    $chat_window = $(`#chat_window_${data.reaction.receiver_id}`);
+    if ($chat_window.length==0) {
+      $chat_window.html(data.chat_window)
+      $chat_window.before(data.received_message)
+
+    }
+  },
 });
