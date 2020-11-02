@@ -1,6 +1,13 @@
 # frozen_string_literal: true
 
 Rails.application.routes.draw do
+  devise_for :users, controllers: {
+    registrations: "users/registrations",
+    passwords: "users/passwords",
+    confirmations: "users/confirmations",
+    unlocks: "users/unlocks",
+    omniauth_callbacks: "users/omniauth_callbacks"
+  }
   get "/help", to: "static_pages#help"
   get "/about", to: "static_pages#about"
   get "/contact", to: "static_pages#contact"
@@ -9,7 +16,7 @@ Rails.application.routes.draw do
   get "/login", to: "sessions#new"
   post "/login", to: "sessions#create"
   delete "/logout", to: "sessions#destroy"
-  get "/auth/:provider/callback", to: "sessions#omniauth"
+  # get "/auth/:provider/callback", to: "sessions#omniauth"
   patch "/users/read/:id", to: "users#read_notification", as: "users_read"
 
   resources :microposts, only: %i(create destroy)

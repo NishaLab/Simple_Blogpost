@@ -2,6 +2,7 @@
 
 # micopost controller
 class MicropostsController < ApplicationController
+  load_and_authorize_resource
   before_action :set_micropost, only: %i(show edit update destroy)
   before_action :logged_in_user, only: %i(create destroy)
   before_action :correct_user, only: :destroy

@@ -22,10 +22,14 @@
     <% end %>
     <p>New Users? <%= link_to 'Sign up now!', sign_up_path %></p>
     <div class="google">
-      <%= link_to  "Sign in with Google", '/auth/google_oauth2' %>
+      <%= link_to  "Sign in with Google", user_google_oauth2_omniauth_authorize_path %>
     </div>
-        <div class="facebook">
-      <%= link_to  "Sign in with Facebook", '/auth/facebook' %>
+    <div class="facebook">
+      <%= link_to  "Sign in with Facebook", user_facebook_omniauth_authorize_path %>
     </div>
+    <div class="github">
+      <%= link_to "Sign in with Github", user_github_omniauth_authorize_path %>
+    </div>
+
   </div>
 </div>

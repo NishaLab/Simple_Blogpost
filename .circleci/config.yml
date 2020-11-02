@@ -56,7 +56,6 @@ jobs:
       - run: bundle exec rake webpacker:compile
       - run: bundle exec rake assets:precompile
 
-      - run: bundle exec rails db:migrate
-      - run: bundle exec rails db:seed
+      - run: bundle exec rails db:reset
       - run: bundle exec rubocop
       - run: bundle exec rspec

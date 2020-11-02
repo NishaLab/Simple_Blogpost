@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class UsersController < ApplicationController
+  load_and_authorize_resource
   before_action :set_user, only: %i(show edit update destroy read_notification)
   before_action :logged_in_user, only: %i(index show edit update following followers)
   before_action :correct_user, only: %i(edit update)
@@ -81,14 +82,14 @@ class UsersController < ApplicationController
     csv = ExportCsvService.new
     compressed_filestream = Zip::OutputStream.write_buffer do |zos|
       zos.put_next_entry "export_posts.csv"
-      zos.print csv.export_posts current_user.id
+      zos.print csv.export_posts params[:id]
       zos.put_next_entry "export_followers.csv"
-      zos.print csv.export_followers current_user.id
+      zos.print csv.export_followers params[:id]
       zos.put_next_entry "export_followings.csv"
-      zos.print csv.export_followings current_user.id
+      zos.print csv.export_followings params[:id]
     end
     compressed_filestream.rewind
-    send_data compressed_filestream.read, filename: "export_for_user_#{current_user.id}_#{Time.zone.now}.zip"
+    send_data compressed_filestream.read, filename: "export_for_user_#{params[:id]}_#{Time.zone.now}.zip"
   end
 
   def read_notification
