@@ -1,0 +1,34 @@
+// Place all the styles related to the Message controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome";
+
+.darker {
+  border-color: #ccc;
+  background-color: #ddd;
+  .gravatar {
+    float: left;
+  }
+}
+.lighter{
+  p{
+    height: auto;
+    width: 100%;
+  }
+  .gravatar{
+    float: right;
+  }
+}
+
+.time-right {
+  float: right;
+  color: #aaa;
+}
+
+/* Style time text */
+.time-left {
+  float: left;
+  color: #999;
+}

@@ -1,0 +1,5 @@
+<div class="container lighter">
+  <%= link_to gravatar_for(message.receiver, size: 50), message.receiver %>
+  <p><%= message.content %></p>
+  <span class="time-left"><%= message.created_at %></span>
+</div>

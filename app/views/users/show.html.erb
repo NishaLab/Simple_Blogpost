@@ -7,11 +7,14 @@
         <%= @user.name %>
       </h1>
     </section>
-    <%= render 'shared/follow_form' if logged_in? %>
+    <%= render "shared/follow_form" if logged_in? %>
     <section class="stats">
-      <%= render 'shared/stat' %>
+      <%= render "shared/stat" %>
     </section>
-    <section class="stats">
+    <section class="send_message">
+    <%= content_tag :button, "Send message", class: "btn btn-primary" %>
+    </section>
+    <section class="exports">
       <%= link_to "export micropost as excel", export_path(format: :csv) %>
     </section>
   </aside>
@@ -20,10 +23,20 @@
     <h3>Microposts (<%= @user.microposts.count %>)</h3>
     <ol class="microposts">
       <% for @micropost in @microposts %>
-      <%= render 'microposts/micropost', micropost: @micropost %>
+      <%= render "microposts/micropost", micropost: @micropost %>
       <% end %>
     </ol>
     <%= will_paginate @microposts %>
     <% end %>
   </div>
 </div>
+<script>
+
+function openForm() {
+  document.getElementById("myForm").style.display = "block";
+}
+
+function closeForm() {
+  document.getElementById("myForm").style.display = "none";
+}
+</script>
