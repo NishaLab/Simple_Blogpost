@@ -1,0 +1,18 @@
+<div id="chat_window_<%= receiver_id %>" class = "chat-popup">
+  <% messages.each do |message| %>
+    <% if message.sender.id == current_user.id %>
+      <%= render "shared/sender", message: message %>
+    <% else %>
+      <%= render "shared/receiver", message: message %>
+    <% end %>
+  <% end %>
+  <%= render "messages/message_form", sender_id: sender_id, receiver_id: receiver_id %>
+  <button type="button" class = "btn btn-danger" onclick="closeForm()" id = "close_btt">Close</button>
+</div>
+<script>
+
+function closeForm() {
+  $('#chat_window_<%= receiver_id %>').css("display","none")
+}
+
+</script>

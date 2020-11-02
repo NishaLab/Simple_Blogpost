@@ -1,5 +1,6 @@
-<div class="container darker">
-  <%= link_to gravatar_for(message.receiver, size: 50), message.receiver %>
+<div class="darker">
+  <%= link_to gravatar_for(message.sender, size: 50), message.receiver %>
+  <p> <%= message.sender.name %> </p>
   <p><%= message.content %></p>
   <span class="time-right"><%= message.created_at %></span>
 </div>
