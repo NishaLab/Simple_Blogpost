@@ -1,5 +1,5 @@
 <div id="chat_window_<%= receiver_id %>" class = "chat-popup">
-  <div id="chat_content_<%=receiver_id%>">
+  <div id="chat_content">
     <% messages.each do |message| %>
       <% if message.sender.id == current_user.id %>
         <%= render "shared/sender", message: message %>

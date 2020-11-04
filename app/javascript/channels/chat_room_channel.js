@@ -10,11 +10,16 @@ consumer.subscriptions.create("ChatRoomChannel", {
   },
 
   received(data) {
-    $chat_window = $(`#chat_window_${data.reaction.receiver_id}`);
-    if ($chat_window.length==0) {
-      $chat_window.html(data.chat_window)
-      $chat_window.before(data.received_message)
-
+    console.log(data.message)
+    var $window, $chat_window;
+    $window = $("#chats");
+    $chat_window = $(`#chat_window_${data.message.sender_id}`);
+    console.log($window)
+    console.log($chat_window.length)
+    if ($chat_window.length == 0) {
+      $window.before(data.chat_window);
+    } else {
+      $chat_window.before(data.received_message);
     }
   },
 });

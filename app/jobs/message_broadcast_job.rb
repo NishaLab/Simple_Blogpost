@@ -2,7 +2,7 @@ class MessageBroadcastJob < ApplicationJob
   queue_as :default
 
   def perform message
-    ActionCable.server.broadcast "chat_room_#{message.receiver}_channel",
+    ActionCable.server.broadcast "chat_room_#{message.receiver.id}_channel",
                                  received_message: render_message(message),
                                  message: message, chat_window: render_chat_window(message)
   end
@@ -12,9 +12,10 @@ class MessageBroadcastJob < ApplicationJob
   end
 
   def render_chat_window message
-    ApplicationController.renderer.render(partial: "message/chat_form",
+    ApplicationController.renderer.render(partial: "messages/chat_form",
                                           locals: { messages: Message.current_user_messages(message.receiver.id),
                                                     receiver_id: message.sender.id,
-                                                    sender_id: message.receiver.id })
+                                                    sender_id: message.receiver.id,
+                                                    current_user: message.receiver })
   end
 end
