@@ -12,10 +12,13 @@ class MessageBroadcastJob < ApplicationJob
   end
 
   def render_chat_window message
+    data = {
+      messages: Message.messages_between(message.sender.id,message.receiver.id),
+      receiver_id: message.sender.id,
+      sender_id: message.receiver.id,
+      current_user: message.receiver
+    }
     ApplicationController.renderer.render(partial: "messages/chat_form",
-                                          locals: { messages: Message.current_user_messages(message.receiver.id),
-                                                    receiver_id: message.sender.id,
-                                                    sender_id: message.receiver.id,
-                                                    current_user: message.receiver })
+                                          locals: data )
   end
 end

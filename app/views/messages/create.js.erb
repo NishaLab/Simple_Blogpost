@@ -1,3 +1,4 @@
-$('#chat_content').before(
+
+$('#chat_content_<%= @message.receiver.id %>').append(
   "<%= escape_javascript(render 'shared/sender', message: @message).html_safe %>"
 )

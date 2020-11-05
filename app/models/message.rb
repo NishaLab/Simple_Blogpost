@@ -8,5 +8,8 @@ class Message < ApplicationRecord
   validates :sender_id, presence: true
   validates :receiver_id, presence: true
 
-  scope :current_user_messages, ->(user_id) { where(sender_id: user_id).or(self.where(receiver_id: user_id))}
+  scope :messages_between, ->(sender_id, receiver_id) {
+      where(sender_id: sender_id, receiver_id: receiver_id)
+        .or(self.where(sender_id: receiver_id, receiver_id: sender_id))
+    }
 end

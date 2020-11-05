@@ -34,10 +34,12 @@
 <script>
 
 function openForm() {
+  <% sender_id = current_user.id%>
+  <% receiver_id = @user.id %>
   $('#chats').html(
   "<%= escape_javascript(render "messages/chat_form",
-                                messages: Message.current_user_messages(current_user.id),
-                                receiver_id: @user.id, sender_id: current_user.id).html_safe %>"
+                                messages: Message.messages_between(sender_id, @user.id),
+                                receiver_id: receiver_id, sender_id: sender_id).html_safe %>"
   )
   $('#chat_window_<%= @user.id %>').css("display","block")
 
