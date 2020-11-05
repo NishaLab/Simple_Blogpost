@@ -28,13 +28,14 @@
 .time-left {
   color: #999;
 }
-
-.chat-popup {
+#chats{
   position: fixed;
   bottom: 0;
-  right: 15px;
+}
+
+.chat-popup {
+  float: left;
   border: 3px solid #212121;
-  z-index: 9;
   width: 500px;
   height: 500px;
   overflow: scroll;
