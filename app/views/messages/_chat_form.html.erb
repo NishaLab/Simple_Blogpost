@@ -1,4 +1,4 @@
-<div id="chat_window_<%= receiver_id %>" class = "chat-popup">
+<div id="chat_window_<%= receiver_id %>" class = "chat_popup">
   <div id="chat_content_<%= receiver_id %>">
     <% messages.each do |message| %>
       <% if message.sender.id == current_user.id %>
