@@ -1,0 +1,56 @@
+// Place all the styles related to the Message controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: https://sass-lang.com/
+@import "bootstrap-sprockets";
+@import "bootstrap";
+@import "font-awesome";
+
+.darker {
+  padding: 10px;
+  border-color: #ccc;
+  background-color: #ddd;
+}
+.lighter {
+  padding: 10px;
+  border-color: black;
+  background-color: whitesmoke;
+  p {
+    height: auto;
+    width: 100%;
+  }
+}
+
+.time_right {
+  color: #aaa;
+}
+
+/* Style time text */
+.time_left {
+  color: #999;
+}
+#chats{
+  position: fixed;
+  bottom: 0;
+}
+
+.chat_popup {
+  float: left;
+  border: 3px solid #212121;
+  width: 500px;
+  height: 500px;
+  overflow: scroll;
+  background-color: white;
+  input {
+    width: 100%;
+    padding: 0px;
+    margin: 0px;
+  }
+}
+
+#close_btt {
+  margin-top: 15px;
+}
+
+#message_content {
+  width: 100%;
+}

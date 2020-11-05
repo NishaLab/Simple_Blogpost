@@ -7,11 +7,14 @@
         <%= @user.name %>
       </h1>
     </section>
-    <%= render 'shared/follow_form' if logged_in? %>
+    <%= render "shared/follow_form" if logged_in? %>
     <section class="stats">
-      <%= render 'shared/stat' %>
+      <%= render "shared/stat" %>
     </section>
-    <section class="stats">
+    <section class="send_message">
+      <button type="button" class = "btn btn-primary" onclick="openForm()">Chat</button>
+    </section>
+    <section class="exports">
       <%= link_to "export micropost as excel", export_path(format: :csv) %>
     </section>
   </aside>
@@ -20,10 +23,26 @@
     <h3>Microposts (<%= @user.microposts.count %>)</h3>
     <ol class="microposts">
       <% for @micropost in @microposts %>
-      <%= render 'microposts/micropost', micropost: @micropost %>
+      <%= render "microposts/micropost", micropost: @micropost %>
       <% end %>
     </ol>
     <%= will_paginate @microposts %>
     <% end %>
   </div>
+
 </div>
+<script>
+
+function openForm() {
+  <% sender_id = current_user.id%>
+  <% receiver_id = @user.id %>
+  $('#chats').html(
+  "<%= escape_javascript(render "messages/chat_form",
+                                messages: Message.messages_between(sender_id, @user.id),
+                                receiver_id: receiver_id, sender_id: sender_id).html_safe %>"
+  )
+  $('#chat_window_<%= @user.id %>').css("display","block")
+
+}
+
+</script>
