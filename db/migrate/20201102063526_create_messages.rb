@@ -7,7 +7,5 @@ class CreateMessages < ActiveRecord::Migration[6.0]
 
       t.timestamps
     end
-    add_index :relationships, :sender_id
-    add_index :relationships, :receiver_id
   end
 end
