@@ -28,7 +28,7 @@ RSpec.describe MessagesController, type: :controller do
         ),
         chat_window: ApplicationController.renderer.render(
           partial: "messages/chat_form",
-          locals: { messages: Message.messages_between(Message.last.sender_id ,Message.last.receiver.id),
+          locals: { messages: Message.messages_between(Message.last.sender_id, Message.last.receiver.id),
                     receiver_id: Message.last.sender.id,
                     sender_id: Message.last.receiver.id,
                     current_user: user }
