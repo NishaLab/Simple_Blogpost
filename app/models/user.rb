@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
   attr_accessor :remember_token, :activation_token, :reset_token
   scope :recent_posts, ->(user_id) { where(user_id: user_id, parent_id: nil).where("created_at > ?", 1.month.ago) }
-
+  scope :new_users, ->() { where("created_at > ?", 1.day.ago) }
   before_save { self.email = email.downcase }
   before_create :create_activation_digest
 
