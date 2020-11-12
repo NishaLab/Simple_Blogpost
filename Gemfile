@@ -45,6 +45,7 @@ gem "rubyzip"
 gem "bootsnap", ">= 1.4.2", require: false
 gem "rubocop", "0.71", require: false
 # Google Authen
+gem "async-websocket", "~> 0.8.0"
 gem "cancancan"
 gem "devise"
 gem "dotenv-rails"
@@ -54,6 +55,8 @@ gem "omniauth-facebook"
 gem "omniauth-github"
 gem "omniauth-google-oauth2"
 gem "rolify"
+gem "slack-ruby-client"
+
 # il8n
 gem "rails-i18n"
 group :development, :test do

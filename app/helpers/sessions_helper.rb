@@ -46,4 +46,23 @@ module SessionsHelper
   def store_location
     session[:forwarding_url] = request.original_url if request.get?
   end
+
+  def daily_report
+    slack = DailyReportSlackService.new
+    @current_user_count   = User.all.count
+    @new_user_count       = User.where("created_at > ?", 1.day.ago).count
+    @new_post             = Micropost.new_posts
+    @new_post_count       = Micropost.new_posts.count
+    @new_react            = Reaction.new_reactions
+    @interact_user_count  = @new_post.pluck[:user_id] + @new_react.pluck(:user_id)
+    @interact_user_count  = @interact_user_count.uniq.count
+    slack.report(@current_user_count, @new_post_count, @new_post_count, @interact_user_count).deliver
+  rescue StandardError => e
+    error_report("Exception at #{__method__} " + e.message)
+  end
+
+  def error_report message
+    slack = DailyReportSlackService.new
+    slack.error_report(message).deliver
+  end
 end

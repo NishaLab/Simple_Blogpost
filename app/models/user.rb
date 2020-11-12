@@ -11,6 +11,7 @@ class User < ApplicationRecord
          :omniauthable, omniauth_providers: %i(github facebook google_oauth2)
 
   attr_accessor :remember_token, :activation_token, :reset_token
+  scope :recent_posts, ->(user_id) { where(user_id: user_id, parent_id: nil).where("created_at > ?", 1.month.ago) }
 
   before_save { self.email = email.downcase }
   before_create :create_activation_digest
