@@ -1,0 +1,5 @@
+:schedule:
+  DailyReportJob:
+    cron: "0 7 * * * Etc/UTC" 
+    queue: default
+    enabled: true

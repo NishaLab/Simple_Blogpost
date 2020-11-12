@@ -55,8 +55,11 @@ gem "omniauth-facebook"
 gem "omniauth-github"
 gem "omniauth-google-oauth2"
 gem "rolify"
+gem "sidekiq"
+gem "sidekiq-cron"
+gem "sidekiq-scheduler"
 gem "slack-ruby-client"
-
+gem "whenever"
 # il8n
 gem "rails-i18n"
 group :development, :test do
