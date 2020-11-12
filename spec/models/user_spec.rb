@@ -41,8 +41,9 @@ RSpec.describe User, type: :model do
   end
 
   it "should have new_users correct scope data" do
-    user1 = FactoryBot.create(:user,created_at: 2.days.ago)
+    user1 = FactoryBot.create(:user, created_at: 2.days.ago)
     expect(User.new_users.count).to eq(1)
     expect(User.new_users).to include(user)
+    expect(User.new_users).not_to include(user1)
   end
 end

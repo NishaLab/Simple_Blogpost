@@ -20,8 +20,10 @@ RSpec.describe Micropost, type: :model do
     expect(post).to be_valid
   end
   it "should have new_posts correct scope data" do
-    post2 = FactoryBot.create(:micropost,user_id: user.id, parent_id: nil, created_at: 2.days.ago)
+    post2 = FactoryBot.create(:micropost, user_id: user.id,
+       parent_id: nil, created_at: 2.days.ago)
     expect(Micropost.new_posts.count).to eq(1)
     expect(Micropost.new_posts).to include(post)
+    expect(Micropost.new_posts).not_to include(post2)
   end
 end
