@@ -434,7 +434,7 @@ DEPENDENCIES
   rails-controller-testing
   rails-helper
   rails-i18n
-  redis (~> 4.0)
+  redis
   rolify
   rspec-rails (~> 4.0.1)
   rubocop (= 0.71)
