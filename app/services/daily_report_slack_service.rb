@@ -86,6 +86,7 @@ class DailyReportSlackService
     Net::HTTP.post_form(@uri, @params)
   rescue StandardError => e
     Rails.logger.error("BespokeSlackbotService: Error when sending: #{e.message}")
+    "BespokeSlackbotService: Error when sending: #{e.message}"
   end
 
   def generate_payload params
