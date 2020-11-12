@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
   attr_accessor :remember_token, :activation_token, :reset_token
   scope :recent_posts, ->(user_id) { where(user_id: user_id, parent_id: nil).where("created_at > ?", 1.month.ago) }
-  scope :new_users, -> { where("created_at > ?", 1.day.ago) }
+  scope :new_users, -> { where("created_at BETWEEN ? AND ?", 1.day.ago.beginning_of_day, 1.day.ago.end_of_day) }
   before_save { self.email = email.downcase }
   before_create :create_activation_digest
 
@@ -82,7 +82,7 @@ class User < ApplicationRecord
   def feed
     following_ids = "SELECT followed_id FROM relationships WHERE follower_id = :user_id"
     Micropost.where("user_id IN (#{following_ids}) OR user_id = :user_id AND parent_id IS :parent_id",
-                     user_id: id, parent_id: nil)
+                    user_id: id, parent_id: nil)
   end
 
   def follow other_user
@@ -104,10 +104,10 @@ class User < ApplicationRecord
     # handle if user isn't exist in database
     password = SecureRandom.urlsafe_base64
     user || User.create(name: data["name"], email: data["email"],
-                         password: password,
-                         password_confirmation: password,
-                         activated: true, activated_at: Time.zone.now,
-                         confirmed_at: Time.zone.now)
+                        password: password,
+                        password_confirmation: password,
+                        activated: true, activated_at: Time.zone.now,
+                        confirmed_at: Time.zone.now)
   end
 
   private

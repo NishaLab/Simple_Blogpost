@@ -11,7 +11,7 @@ class Reaction < ApplicationRecord
                                     post_ids = Micropost.where(user_id: user_id).pluck(:id)
                                     self.where(micropost_id: post_ids, is_read: false)
                                   }
-  scope :new_reactions, -> { where("created_at > ?", 1.day.ago) }
+  scope :new_reactions, -> { where("created_at BETWEEN ? AND ?", 1.day.ago.beginning_of_day, 1.day.ago.end_of_day) }
 
   belongs_to :user
   belongs_to :micropost

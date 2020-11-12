@@ -3,7 +3,7 @@ require "rails_helper"
 RSpec.describe Micropost, type: :model do
   let(:user) { FactoryBot.create(:user) }
   let(:parent) { FactoryBot.create(:micropost, user_id: user.id) }
-  let!(:post) { FactoryBot.create(:micropost, user_id: user.id) }
+  let!(:post) { FactoryBot.create(:micropost, user_id: user.id, created_at: 25.hours.ago) }
 
   it "is not valid without user id" do
     post = Micropost.new(user_id: nil, content: "123")

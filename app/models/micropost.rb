@@ -5,7 +5,7 @@ class Micropost < ApplicationRecord
   resourcify
   MICROPOST_ATTRIBUTES = %w(content created_at).freeze
   scope :recent_posts, ->(user_id) { where(user_id: user_id, parent_id: nil).where("created_at > ?", 1.month.ago) }
-  scope :new_posts, -> { where("created_at > ?", 1.day.ago) }
+  scope :new_posts, -> { where("created_at BETWEEN ? AND ?", 1.day.ago.beginning_of_day, 1.day.ago.end_of_day) }
 
   belongs_to :user
   belongs_to :parent_post, class_name: "Micropost", optional: true

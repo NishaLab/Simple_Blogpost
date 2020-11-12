@@ -233,6 +233,8 @@ GEM
       nio4r (~> 2.0)
     raabro (1.4.0)
     rack (2.2.3)
+    rack-protection (2.1.0)
+      rack
     rack-proxy (0.6.5)
       rack
     rack-test (1.1.0)
@@ -276,7 +278,7 @@ GEM
     rb-fsevent (0.10.4)
     rb-inotify (0.10.1)
       ffi (~> 1.0)
-    redis (4.2.2)
+    redis (4.1.4)
     regexp_parser (1.8.1)
     responders (3.0.1)
       actionpack (>= 5.0)
@@ -327,10 +329,11 @@ GEM
     selenium-webdriver (3.142.7)
       childprocess (>= 0.5, < 4.0)
       rubyzip (>= 1.2.2)
-    sidekiq (6.1.2)
-      connection_pool (>= 2.2.2)
+    sidekiq (5.2.9)
+      connection_pool (~> 2.2, >= 2.2.2)
       rack (~> 2.0)
-      redis (>= 4.2.0)
+      rack-protection (>= 1.5.0)
+      redis (>= 3.3.5, < 4.2)
     sidekiq-cron (1.2.0)
       fugit (~> 1.1)
       sidekiq (>= 4.2.1)
@@ -442,7 +445,7 @@ DEPENDENCIES
   rubyzip
   sass-rails (>= 6)
   selenium-webdriver
-  sidekiq
+  sidekiq (~> 5.2.8)
   sidekiq-cron
   sidekiq-scheduler
   slack-ruby-client

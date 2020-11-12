@@ -18,7 +18,10 @@ RSpec.describe Reaction, type: :model do
     expect(react).to_not be_valid
   end
   it "should have correct new reaction scope data" do
-    react1 = FactoryBot.create(:reaction, user_id: user.id, micropost_id: micropost.id, image_id: 1)
+    react1 = FactoryBot.create(:reaction, user_id: user.id,
+                                micropost_id: micropost.id,
+                                image_id: 1,
+                                created_at: 25.hours.ago)
     react2 = FactoryBot.create(:reaction, user_id: user2.id,
        micropost_id: micropost.id,
        image_id: 1, created_at: 2.days.ago)
