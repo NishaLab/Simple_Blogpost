@@ -2,6 +2,6 @@ class DailyReportJob < ApplicationJob
   queue_as :default
 
   def perform
-    SessionsController.new.daily_report
+    SessionsController.new.create_report
   end
 end
