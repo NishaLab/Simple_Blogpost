@@ -14,8 +14,14 @@
 #
 # See http://rubydoc.info/gems/rspec-core/RSpec/Core/Configuration
 require "webmock/rspec"
-WebMock.disable_net_connect!(allow_localhost: true)
+require "vcr"
 
+# WebMock.disable_net_connect!(allow_localhost: true)
+
+VCR.configure do |config|
+  config.cassette_library_dir = "spec/vcr"
+  config.hook_into :webmock
+end
 RSpec.configure do |config|
   # rspec-expectations config goes here. You can use an alternate
   # assertion/expectation library such as wrong or the stdlib/minitest

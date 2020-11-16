@@ -88,9 +88,9 @@ group :test do
   gem "action-cable-testing"
   gem "database_cleaner-active_record"
   gem "factory_bot_rails"
+  gem "vcr"
   gem "webdrivers"
   gem "webmock"
-
   # Template testing
   gem "rails-controller-testing"
 end
