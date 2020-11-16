@@ -5,6 +5,7 @@ FactoryBot.define do
     password_confirmation { "12345678" }
     name { "hung1234" }
     activated { true }
+    created_at { Time.zone.now }
     confirmed_at { Time.zone.now }
     activated_at { Time.zone.now }
   end
@@ -14,6 +15,7 @@ FactoryBot.define do
     content { "asfasd" }
     user_id { user.id }
     parent_id { nil }
+    created_at { Time.zone.now }
   end
 
   factory :reaction do

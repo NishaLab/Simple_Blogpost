@@ -32,7 +32,7 @@ gem "turbolinks", "~> 5"
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem "jbuilder", "~> 2.7"
 # Use Redis adapter to run Action Cable in production
-gem "redis", "~> 4.0"
+gem "redis"
 # Use Active Model has_secure_password
 # gem 'bcrypt', '~> 3.1.7'
 gem "font-awesome-rails"
@@ -45,6 +45,7 @@ gem "rubyzip"
 gem "bootsnap", ">= 1.4.2", require: false
 gem "rubocop", "0.71", require: false
 # Google Authen
+gem "async-websocket", "~> 0.8.0"
 gem "cancancan"
 gem "devise"
 gem "dotenv-rails"
@@ -54,6 +55,11 @@ gem "omniauth-facebook"
 gem "omniauth-github"
 gem "omniauth-google-oauth2"
 gem "rolify"
+gem "sidekiq", "~> 5.2.8"
+gem "sidekiq-cron"
+gem "sidekiq-scheduler"
+gem "slack-ruby-client"
+gem "whenever"
 # il8n
 gem "rails-i18n"
 group :development, :test do
@@ -82,8 +88,9 @@ group :test do
   gem "action-cable-testing"
   gem "database_cleaner-active_record"
   gem "factory_bot_rails"
+  gem "vcr"
   gem "webdrivers"
-
+  gem "webmock"
   # Template testing
   gem "rails-controller-testing"
 end
