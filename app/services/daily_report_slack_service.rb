@@ -51,7 +51,7 @@ class DailyReportSlackService
               short: true
             },
             {
-              value: "<@U01EKC3S5U3> , <@U01EXTMQS3T>"
+              value: "<@U01EKC3S5U3>"
             }
           ]
         }
@@ -83,10 +83,11 @@ class DailyReportSlackService
   end
 
   def deliver
-    Net::HTTP.post_form(@uri, @params)
+    response = Net::HTTP.post_form(@uri, @params)
+    raise "Error code #{response.code}" if response.code != "200"
   rescue StandardError => e
-    Rails.logger.error("BespokeSlackbotService: Error when sending: #{e.message}")
-    "BespokeSlackbotService: Error when sending: #{e.message}"
+    Rails.logger.error("DailyReportSlackService: Error when sending: #{e.message}")
+    "DailyReportSlackService: Error when sending: #{e.message}"
   end
 
   def generate_payload params

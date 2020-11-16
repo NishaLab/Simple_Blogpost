@@ -16,9 +16,10 @@
 require "webmock/rspec"
 require "vcr"
 
-# WebMock.disable_net_connect!(allow_localhost: true)
+WebMock.disable_net_connect!(allow_localhost: true)
 
 VCR.configure do |config|
+  config.filter_sensitive_data("<uri>") { ENV["SLACK_WEBHOOK_URL"] }
   config.cassette_library_dir = "spec/vcr"
   config.hook_into :webmock
 end
