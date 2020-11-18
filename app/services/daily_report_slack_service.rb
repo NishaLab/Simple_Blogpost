@@ -51,7 +51,7 @@ class DailyReportSlackService
               short: true
             },
             {
-              value: "<@U01EKC3S5U3>"
+              value: "<@U01EKC3S5U3>, <@U01EXTMQS3T>"
             }
           ]
         }
