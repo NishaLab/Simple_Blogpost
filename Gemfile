@@ -60,6 +60,17 @@ gem "sidekiq-cron"
 gem "sidekiq-scheduler"
 gem "slack-ruby-client"
 gem "whenever"
+
+# deploy to ec2
+
+gem "capistrano"
+gem "capistrano-bundler"
+gem "capistrano-figaro-yml", "~> 1.0.2"
+gem "capistrano-passenger", ">= 0.1.1"
+gem "capistrano-rails"
+gem "capistrano-rvm"
+gem "capistrano-rbenv"
+gem 'capistrano3-puma'
 # il8n
 gem "rails-i18n"
 group :development, :test do

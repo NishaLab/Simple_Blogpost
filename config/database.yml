@@ -81,5 +81,7 @@ test:
 production:
   <<: *default
   database: blog_ruby_production
-  username: blog_ruby_
+  username: root
   password: <%= ENV['BLOG_RUBY_DATABASE_PASSWORD'] %>
+  host:     <%= ENV['BLOG_RUBY_DATABASE_HOST'] %>
+  port:     <%= ENV['BLOG_RUBY_DATABASE_PORT'] %>

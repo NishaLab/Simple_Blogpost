@@ -35,4 +35,5 @@
 yarn-debug.log*
 .yarn-integrity
 .env
-.application.yml
+application.yml
+blog-ruby-key-pair.pem
