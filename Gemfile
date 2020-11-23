@@ -62,6 +62,12 @@ gem "slack-ruby-client"
 gem "whenever"
 # il8n
 gem "rails-i18n"
+# capistrano
+gem "capistrano"
+gem "capistrano-bundler", require: false
+gem "capistrano-rails", require: false
+gem "capistrano-rvm"
+gem "capistrano3-puma"
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem "byebug", platforms: %i(mri mingw x64_mingw)
